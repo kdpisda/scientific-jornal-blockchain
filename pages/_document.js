@@ -46,9 +46,18 @@ export default class MyDocument extends Document {
             href="./static/css/styles.min.css?h=48930a4107b1ca5eb39ae1e606c0ea3f"
           />
           <link rel="stylesheet" href="./static/css/index.css" />
-          <link rel="stylesheet" href="./static/bootstrap/css/bootstrap.min.css?h=8a6c2afcccaaabb2f6a787d71efc0bd9" />
-          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" />
-          <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" />
+          <link
+            rel="stylesheet"
+            href="./static/bootstrap/css/bootstrap.min.css?h=8a6c2afcccaaabb2f6a787d71efc0bd9"
+          />
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          />
+          <link
+            rel="stylesheet"
+            href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+          />
         </head>
         <body>
           <Main />
@@ -56,6 +65,11 @@ export default class MyDocument extends Document {
         </body>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js" />
+        <script src="./static/js/script.min.js?h=5f9b75209a5bec2eae9db1b514298205" />
       </html>
     );
   }

@@ -3,6 +3,7 @@ import Router from "next/router";
 import web3 from "../utils/helper";
 import { review, createUser, wallet } from "../ethereum/app";
 import { inject } from "mobx-react";
+import { runInAction } from "mobx";
 
 @inject("store")
 export default class Login extends React.Component {
@@ -84,9 +85,13 @@ export default class Login extends React.Component {
                           onClick={() => {
                             review
                               .getUser(this.state.account)
-                              .then(response => {
-                                user.address = this.state.account;
-                              })
+                              .then(response =>
+                                runInAction(() => {
+                                  user.address = this.state.account;
+                                  user.details.name = response[0];
+                                  user.details.fileCount = response[1];
+                                })
+                              )
                               .catch(e =>
                                 console.log("*******************", e)
                               );

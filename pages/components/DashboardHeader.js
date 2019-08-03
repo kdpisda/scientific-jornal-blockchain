@@ -1,14 +1,15 @@
 import React from "react";
 import { getUser } from "../../ethereum/app";
+import { inject } from "mobx-react";
 
+@inject("store")
 export default class Header extends React.Component {
   state = {
     user: null
   };
 
   render() {
-    getUser().then(user => this.setState({ user }));
-    console.log(this.state.user);
+    const { user } = this.props.store;
     return (
       <nav className="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
         <div className="container-fluid">
@@ -74,7 +75,7 @@ export default class Header extends React.Component {
                   href="#"
                 >
                   <span className="d-none d-lg-inline mr-2 text-gray-600 small">
-                    {"Anynomous"}
+                    {user.address || "Anynomous"}
                   </span>
                 </a>
                 <div

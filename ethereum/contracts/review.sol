@@ -1,55 +1,99 @@
 pragma solidity ^0.5.1;
 
 contract Review {
-    string[] public comments;
-    //0 = Rejected, 1 = Okay, 2 = Great
-    uint[] public rating;
-    // Adopting a pet
-    string[] public hashes;
-    address[] public users;
 
-    function pushAll(string memory comment, uint rati, string memory hashf) public returns (bool) {
-        comments.push(comment);
-        rating.push(rati);
-        hashes.push(hashf);
-        users.push(msg.sender);
+    struct File {
+        bool isExist;
+        string name;
+        uint rating;
+        string hash;
+        string[] comment;
+    }
+
+    struct User {
+        bool isExist;
+        address userAddress;
+        string name;
+        File[] files;
+        mapping(string => File) files_map;
+    }
+
+    mapping(address => User) public users;
+
+    modifier newUser(){
+        if(!users[msg.sender].isExist) revert();
+        _;
+    }
+    modifier existUser(){
+        if(users[msg.sender].isExist) revert();
+        _;
+    }
+
+    modifier newFile(string memory hash){
+        if(!users[msg.sender].files_map[hash].isExist) revert();
+        _;
+    }
+    modifier existFile(string memory hash){
+        if(users[msg.sender].files_map[hash].isExist) revert();
+        _;
+    }
+
+    modifier FileLength(){
+        if(users[msg.sender].files.length != 0) revert();
+        _;
+    }
+
+    function createUser(string memory name) public newUser returns(bool){
+        User memory user;
+        user.userAddress = msg.sender;
+        user.isExist = true;
+        user.name = name;
+        users[msg.sender] = user;
         return true;
     }
 
-    function pushRating(uint i) public returns (bool) {
-        rating.push(i);
+    function getUser() public existUser returns(string memory, uint){
+        return(users[msg.sender].name, users[msg.sender].files.length);
+    }
+
+    function updateUser(string memory name) public existUser returns(bool){
+        users[msg.sender].name = name;
         return true;
     }
 
-    function pushHash(string memory i) public returns (bool) {
-        hashes.push(i);
+    function deleteUser() public existUser returns(bool){
+        users[msg.sender].isExist = false;
         return true;
     }
 
-    function pushUser() public returns (bool a) {
-        users.push(msg.sender);
+    function addFile(string memory hash, string memory name, uint rating) public newFile(hash) existUser returns(bool){
+        File memory file;
+        file.hash = hash;
+        file.isExist = true;
+        file.rating = rating;
+        file.name = name;
+        users[msg.sender].files.push(file);
+        users[msg.sender].files_map[hash] = file;
         return true;
     }
 
-    function getLength() public view returns (uint) {
-        return comments.length;
+    function getUserFileLength() public FileLength returns(uint) {
+        return users[msg.sender].files.length;
     }
 
-    function getCommentAtIndex(uint i) public view returns (string memory) {
-        return(comments[i]);
+    function getUserFilebyIndex(uint index) public FileLength returns(string memory hash, string memory name, uint rating) {
+        return (
+            users[msg.sender].files[index].hash,
+            users[msg.sender].files[index].name,
+            users[msg.sender].files[index].rating
+            );
     }
 
-    function getRatingAtIndex(uint i) public view returns (uint) {
-        return(rating[i]);
+    function updateUserFilebyIndex(uint index, string memory name, uint rating) public FileLength returns(bool) {
+        users[msg.sender].files[index].rating = rating;
+        users[msg.sender].files[index].name = name;
+        users[msg.sender].files_map[users[msg.sender].files[index].hash].rating = rating;
+        users[msg.sender].files_map[users[msg.sender].files[index].hash].name = name;
+        return true;
     }
-
-    function getHashAtIndex(uint i) public view returns (string memory) {
-        return(hashes[i]);
-    }
-
-    function getUserAtIndex(uint i) public view returns (address) {
-        return(users[i]);
-    }
-
-
 }

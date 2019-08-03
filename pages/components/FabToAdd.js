@@ -1,5 +1,4 @@
 import React from "react";
-import Router from "next-routes";
 
 export default class Fab extends React.Component {
   navigateToAdd() {

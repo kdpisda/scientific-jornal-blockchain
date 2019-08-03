@@ -1,55 +1,24 @@
 {
-  "devFiles": [],
+  "devFiles": [
+    "static/development/dll/dll_92fa9139568d8c3d8f78.js",
+    "static/development/dll/dll_92fa9139568d8c3d8f78.js.map"
+  ],
   "pages": {
     "/": [
-      "static/runtime/webpack-3df6523e264ff2ac6548.js",
-      "static/chunks/commons.ae0aa6be96dc654272b2.js",
-      "static/runtime/main-284d9511356fd9bc8147.js"
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ],
     "/_app": [
-      "static/runtime/webpack-3df6523e264ff2ac6548.js",
-      "static/chunks/commons.ae0aa6be96dc654272b2.js",
-      "static/runtime/main-284d9511356fd9bc8147.js"
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ],
     "/_error": [
-      "static/runtime/webpack-3df6523e264ff2ac6548.js",
-      "static/chunks/commons.ae0aa6be96dc654272b2.js",
-      "static/runtime/main-284d9511356fd9bc8147.js"
-    ],
-    "/components/DashboardNavbar": [
-      "static/runtime/webpack-3df6523e264ff2ac6548.js",
-      "static/chunks/commons.ae0aa6be96dc654272b2.js",
-      "static/runtime/main-284d9511356fd9bc8147.js"
-    ],
-    "/components/navbar": [
-      "static/runtime/webpack-3df6523e264ff2ac6548.js",
-      "static/chunks/commons.ae0aa6be96dc654272b2.js",
-      "static/runtime/main-284d9511356fd9bc8147.js"
-    ],
-    "/dashboard": [
-      "static/runtime/webpack-3df6523e264ff2ac6548.js",
-      "static/chunks/commons.ae0aa6be96dc654272b2.js",
-      "static/runtime/main-284d9511356fd9bc8147.js"
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ],
     "/index": [
-      "static/runtime/webpack-3df6523e264ff2ac6548.js",
-      "static/chunks/commons.ae0aa6be96dc654272b2.js",
-      "static/runtime/main-284d9511356fd9bc8147.js"
-    ],
-    "/login": [
-      "static/runtime/webpack-3df6523e264ff2ac6548.js",
-      "static/chunks/commons.ae0aa6be96dc654272b2.js",
-      "static/runtime/main-284d9511356fd9bc8147.js"
-    ],
-    "/profile": [
-      "static/runtime/webpack-3df6523e264ff2ac6548.js",
-      "static/chunks/commons.ae0aa6be96dc654272b2.js",
-      "static/runtime/main-284d9511356fd9bc8147.js"
-    ],
-    "/register": [
-      "static/runtime/webpack-3df6523e264ff2ac6548.js",
-      "static/chunks/commons.ae0aa6be96dc654272b2.js",
-      "static/runtime/main-284d9511356fd9bc8147.js"
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ]
   }
 }

@@ -23,6 +23,11 @@ export default class AddReview extends React.Component {
     review: ""
   };
 
+  constructor() {
+    super();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   componentDidMount() {
     // Initialize the state
     this.setState({ title: "Hakima Matatu" });
@@ -30,6 +35,11 @@ export default class AddReview extends React.Component {
       content:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
     });
+  }
+
+  handleSubmit() {
+    //Do something to handle the submit
+    console.log(this.state);
   }
 
   render() {
@@ -46,6 +56,7 @@ export default class AddReview extends React.Component {
                   <button
                     className="btn btn-primary btn-sm d-none d-sm-inline-block text-white"
                     role="button"
+                    onClick={this.handleSubmit}
                   >
                     <i className="fas fa-check-circle" />
                     &nbsp;Submit

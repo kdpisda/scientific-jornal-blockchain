@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "./components/DashboardNavbar";
 import FAB from "./components/FabToAdd";
 import Header from "./components/DashboardHeader";
+import Footer from "./components/DashboardFooter";
 
 export default class Dashboard extends React.Component {
   render() {
@@ -283,6 +284,7 @@ export default class Dashboard extends React.Component {
                 </div>
               </div>
             </div>
+            <Footer />
           </div>
         </div>
         <FAB />

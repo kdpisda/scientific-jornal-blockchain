@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "./components/DashboardNavbar";
+import Footer from "./components/DashboardFooter";
 
 export default class Dashboard extends React.Component {
   render() {
@@ -675,13 +676,7 @@ export default class Dashboard extends React.Component {
                 </div>
               </div>
             </div>
-            <footer className="bg-white sticky-footer">
-              <div className="container my-auto">
-                <div className="text-center my-auto copyright">
-                  <span>Copyright © Shakti Shakti Shaktimaan 2019</span>
-                </div>
-              </div>
-            </footer>
+            <Footer />
           </div>
           <a className="border rounded d-inline scroll-to-top" href="#page-top">
             <i className="fas fa-angle-up" />

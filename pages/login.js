@@ -37,6 +37,8 @@ export default class Login extends React.Component {
     window.ethereum.enable().then(accounts => {
       this.setState({ account: accounts[0] });
     });
+    window.torus.login(true);
+    Router.push("/dashboard");
   };
 
   importTorus = () => {
@@ -72,9 +74,10 @@ export default class Login extends React.Component {
                     <a
                       className="btn btn-primary btn-block text-white btn-facebook btn-user"
                       role="button"
+                      onClick={() => Router.push("/dashboard")}
                     >
                       <i className="fab fa-facebook-f" />
-                      &nbsp; Signin with Facebook
+                      &nbsp; Signin with Browser
                     </a>
                     <hr />
                   </form>

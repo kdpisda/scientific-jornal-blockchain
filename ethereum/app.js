@@ -4,7 +4,7 @@ let web3Provider = new ethers.providers.JsonRpcProvider(
   `https://testnet2.matic.network`
 );
 
-let reviewContractAddress = "0x3f4cdf3176b7ffb865e52a2b328707d2a9d5f5df";
+let reviewContractAddress = "0xa7b2f458ecc46106b4312cf08f576eff6327df1f";
 let storeContractAddress = "0xd71a648cf882ed954037136ee961f0db53e1689b";
 
 let privateKey =
@@ -19,6 +19,7 @@ var review = new ethers.Contract(reviewContractAddress, ReviewABI.abi, wallet);
 var store = new ethers.Contract(storeContractAddress, StoreABI.abi, wallet);
 
 module.exports = {
+  review,
   createUser: async email => {
     console.log(review);
     review

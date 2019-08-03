@@ -1,7 +1,7 @@
 import React from "react";
 import Router from "next/router";
 import web3 from "../utils/helper";
-import { createUser } from "../ethereum/app";
+import { review, createUser, wallet } from "../ethereum/app";
 
 export default class Login extends React.Component {
   state = {
@@ -47,7 +47,7 @@ export default class Login extends React.Component {
     import("@toruslabs/torus-embed").then(this.enableTorus);
   };
 
-  componentDidUnmount() {
+  componentWillUnmount() {
     document.body.classList.remove("bg-gradient-primary");
   }
 
@@ -80,8 +80,16 @@ export default class Login extends React.Component {
                           className="btn btn-primary py-0"
                           type="button"
                           onClick={() => {
-                            if (console.log(createUser(this.state.email)))
-                              Router.push("/dashboard");
+                            console.log(web3.eth.accounts[0]);
+                            review
+                              .createUser(
+                                "0xbc848c44a72D878aA935CccFe3e307c4e2DB0146",
+                                "Vinay Khobragade"
+                              )
+                              .then(e => console.log(e))
+                              .catch(e => console.log(e));
+                            // if (console.log(createUser(this.state.email)))
+                            //   Router.push("/dashboard");
                           }}
                         >
                           <i className="fas fa-envelope-square" />

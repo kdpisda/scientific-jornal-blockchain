@@ -110,22 +110,24 @@ export default class AddReview extends React.Component {
                   </div>
                 </div>
                 <div className="row">
-                  <div className="col">
-                    <div className="card shadow mb-4">
+                  <div className="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-12">
+                    <div className="card shadow mb-4 align-items-center align-content-center align-self-center">
                       <div className="card-header d-flex justify-content-between align-items-center">
                         <h6 className="text-primary font-weight-bold m-0">
                           Please rate this resource
                         </h6>
                       </div>
-                      <div className="card-body">
-                        <StarRatings
-                          rating={this.state.rating}
-                          starRatedColor="blue"
-                          changeRating={this.changeRating}
-                          numberOfStars={5}
-                          name="rating"
-                        />
-                      </div>
+                      <center>
+                        <div className="card-body">
+                          <StarRatings
+                            rating={this.state.rating}
+                            starRatedColor="blue"
+                            changeRating={this.changeRating}
+                            numberOfStars={5}
+                            name="rating"
+                          />
+                        </div>
+                      </center>
                     </div>
                   </div>
                 </div>

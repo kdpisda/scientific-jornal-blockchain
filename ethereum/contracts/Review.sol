@@ -10,7 +10,7 @@ contract Review {
         string[] comments;
         address[] access;
     }
-
+    
     struct User {
         bool isExist;
         address userAddress;
@@ -40,7 +40,7 @@ contract Review {
     }
     
     modifier FileLength(address useraddress){
-        if(users[useraddress].files.length != 0) revert();
+        if(users[useraddress].files.length == 0) revert();
         _;
     }
     
@@ -87,18 +87,16 @@ contract Review {
     }
     
     function getUserFilebyIndex(address useraddress, uint index) public existUser(useraddress) FileLength(useraddress) isAccess(useraddress, index) view returns(string memory, string memory, uint) {
-        string memory hash = users[useraddress].files[index];
         return (
-            hash,
-            users[useraddress].files_map[hash].name,
-            users[useraddress].files_map[hash].rating
+            users[useraddress].files[index],
+            users[useraddress].files_map[users[useraddress].files[index]].name,
+            users[useraddress].files_map[users[useraddress].files[index]].rating
             );
     }
     
     function updateUserFilebyIndex(address useraddress, uint index, string memory name, uint rating) public existUser(useraddress) FileLength(useraddress) returns(bool) {
-        string memory hash = users[useraddress].files[index];
-        users[useraddress].files_map[hash].rating = rating;
-        users[useraddress].files_map[hash].name = name;
+        users[useraddress].files_map[users[useraddress].files[index]].rating = rating;
+        users[useraddress].files_map[users[useraddress].files[index]].name = name;
         return true;
     }
     

@@ -3,6 +3,7 @@ import { review } from "../ethereum/app";
 import Navbar from "./components/DashboardNavbar";
 import Header from "./components/DashboardHeader";
 import Footer from "./components/DashboardFooter";
+import { inject } from "mobx-react";
 
 var tempData = [
   {
@@ -58,7 +59,6 @@ class ResourceRow extends React.Component {
   }
 
   render() {
-    console.log(this.props.data);
     return (
       <div className="row">
         {this.props.data.map(function(resource, idx) {
@@ -114,6 +114,7 @@ class ResourceRow extends React.Component {
   }
 }
 
+@inject("store")
 export default class Resource extends React.Component {
   constructor() {
     super();
@@ -129,12 +130,13 @@ export default class Resource extends React.Component {
     let i,
       list = [];
     for (i = 0; i < user.details.fileCount; i++) {
-      const file = await review.getUserFilebyIndex(i).call();
-      list.push({
-        id: i,
-        name: file[1],
-        hash: file[0],
-        rating: file[2]
+      review.getUserFilebyIndex(user.address, i).then(file => {
+        list.push({
+          id: i,
+          name: file[1],
+          hash: file[0],
+          rating: file[2]
+        });
       });
     }
 
@@ -144,6 +146,14 @@ export default class Resource extends React.Component {
   getAllResources() {
     var chunckedAry = chunk(this.state.resources, 3);
     return chunckedAry;
+  }
+
+  componentDidMount() {
+    // this.getAllResourcesFromBlockChain(r => console.log(r)).catch(r =>
+    //   console.log(r)
+    // );
+    const { user } = this.props.store;
+    review.getUserFilebyIndex(user.address, 0);
   }
 
   render() {

@@ -54,13 +54,13 @@ export default class Index extends React.Component {
                 </ul>
                 <span className="navbar-text actions">
                   {" "}
-                  <a className="login" href="#">
+                  <a className="login" href="/login">
                     Log In
                   </a>
                   <a
                     className="btn btn-light action-button"
                     role="button"
-                    href="#"
+                    href="/register"
                   >
                     Sign Up
                   </a>
@@ -78,7 +78,7 @@ export default class Index extends React.Component {
               />
             </div>
             <div className="col align-items-center align-content-center align-self-center">
-              <div className="card align-items-center page-header">
+              <div className="card align-items-center page-header" style={{backgroundColor: "#f2f2f2", border: 0}}>
                 <div className="card-body text-center justify-content-center">
                   <h4 className="card-title">Scientific Journal</h4>
                   <h6 className="text-muted card-subtitle mb-2">

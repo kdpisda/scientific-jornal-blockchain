@@ -36,6 +36,11 @@ export default class Register extends React.Component {
                       Already have an account? Login!
                     </a>
                   </div>
+                  <div className="text-center">
+                    <a className="small" href="/">
+                      Home
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

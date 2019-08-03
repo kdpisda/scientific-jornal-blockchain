@@ -36,6 +36,11 @@ export default class Login extends React.Component {
                       Don't have an account? Signup!
                     </a>
                   </div>
+                  <div className="text-center">
+                    <a className="small" href="/">
+                      Home
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

@@ -2,7 +2,7 @@ var ethers = require("ethers");
 
 let web3Provider = ethers.getDefaultProvider("ropsten");
 
-let reviewContractAddress = "0x7a3c74a2e4be2b6e305252d94ae386bfaeef5e07";
+let reviewContractAddress = "0x55248b60584b8dd5eb5d0e0fa3b8b9fbe78d19d6";
 let storeContractAddress = "0xd71a648cf882ed954037136ee961f0db53e1689b";
 
 let privateKey =
@@ -18,15 +18,4 @@ var store = new ethers.Contract(storeContractAddress, StoreABI, wallet);
 
 module.exports = {
   createUser: async email => review.createUser(email),
-  getLength: async function() {
-    console.log(review);
-    return review
-      .getLength()
-      .then(function(result) {
-        return result;
-      })
-      .catch(function(e) {
-        return e;
-      });
-  }
 };

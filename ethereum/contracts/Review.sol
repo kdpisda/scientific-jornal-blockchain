@@ -14,7 +14,7 @@ contract Review {
         bool isExist;
         address userAddress;
         string name;
-        File[] files;
+        string[] files;
         mapping(string => File) files_map;
     }
 
@@ -52,7 +52,7 @@ contract Review {
         return true;
     }
 
-    function getUser() public existUser returns(string memory, uint){
+    function getUser() public existUser view returns(string memory, uint){
         return(users[msg.sender].name, users[msg.sender].files.length);
     }
 
@@ -66,34 +66,34 @@ contract Review {
         return true;
     }
 
-    function addFile(string memory hash, string memory name, uint rating) public newFile(hash) existUser returns(bool){
+    function addFile(string memory hash, string memory name, uint rating) public existUser newFile(hash) existUser returns(bool){
         File memory file;
         file.hash = hash;
         file.isExist = true;
         file.rating = rating;
         file.name = name;
-        users[msg.sender].files.push(file);
+        users[msg.sender].files.push(hash);
         users[msg.sender].files_map[hash] = file;
         return true;
     }
 
-    function getUserFileLength() public FileLength returns(uint) {
+    function getUserFileLength() public view existUser FileLength returns(uint) {
         return users[msg.sender].files.length;
     }
 
-    function getUserFilebyIndex(uint index) public FileLength returns(string memory hash, string memory name, uint rating) {
+    function getUserFilebyIndex(uint index) public existUser FileLength view returns(string memory, string memory, uint) {
+        string memory hash = users[msg.sender].files[index];
         return (
-            users[msg.sender].files[index].hash,
-            users[msg.sender].files[index].name,
-            users[msg.sender].files[index].rating
+            hash,
+            users[msg.sender].files_map[hash].name,
+            users[msg.sender].files_map[hash].rating
             );
     }
 
-    function updateUserFilebyIndex(uint index, string memory name, uint rating) public FileLength returns(bool) {
-        users[msg.sender].files[index].rating = rating;
-        users[msg.sender].files[index].name = name;
-        users[msg.sender].files_map[users[msg.sender].files[index].hash].rating = rating;
-        users[msg.sender].files_map[users[msg.sender].files[index].hash].name = name;
+    function updateUserFilebyIndex(uint index, string memory name, uint rating) public existUser FileLength returns(bool) {
+        string memory hash = users[msg.sender].files[index];
+        users[msg.sender].files_map[hash].rating = rating;
+        users[msg.sender].files_map[hash].name = name;
         return true;
     }
 }

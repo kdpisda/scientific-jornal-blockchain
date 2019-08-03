@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "./components/DashboardNavbar";
 import { Editor } from "@tinymce/tinymce-react";
 import Header from "./components/DashboardHeader";
+import Footer from "./components/DashboardFooter";
 
 export default class Dashboard extends React.Component {
   constructor(){
@@ -73,6 +74,7 @@ export default class Dashboard extends React.Component {
                 </div>
               </div>
             </div>
+            <Footer />
           </div>
         </div>
         <button

@@ -1,4 +1,5 @@
 import React from "react";
+import Router from "next/router";
 import web3 from "../utils/helper";
 
 export default class Login extends React.Component {
@@ -8,6 +9,7 @@ export default class Login extends React.Component {
   };
 
   componentDidMount() {
+    document.body.classList.add("bg-gradient-primary");
     console.log(web3);
     // if not using store
     setTimeout(() => {
@@ -40,6 +42,9 @@ export default class Login extends React.Component {
   importTorus = () => {
     import("@toruslabs/torus-embed").then(this.enableTorus);
   };
+  componentDidUnmount() {
+    document.body.classList.remove("bg-gradient-primary");
+  }
 
   render() {
     return (
@@ -72,8 +77,6 @@ export default class Login extends React.Component {
                       &nbsp; Signin with Facebook
                     </a>
                     <hr />
-                    <div>Account: {this.state.account}</div>
-                    <div>Balance: {this.state.balance}</div>
                   </form>
                   <div className="text-center">
                     <a className="small" href="/register">

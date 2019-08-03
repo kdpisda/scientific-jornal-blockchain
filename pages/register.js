@@ -1,6 +1,14 @@
 import React from "react";
 
 export default class Register extends React.Component {
+  componentDidMount(){
+    document.body.classList.add("bg-gradient-primary");
+  }
+
+  componentDidUnmount(){
+    document.body.classList.remove("bg-gradient-primary");
+  }
+  
   render() {
     return (
       <div className="container">

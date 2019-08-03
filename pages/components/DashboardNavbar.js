@@ -7,13 +7,13 @@ export default class Navbar extends React.Component {
         <div className="container-fluid d-flex flex-column p-0">
           <a
             className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
-            href="#"
+            href="/"
           >
             <div className="sidebar-brand-icon rotate-n-15">
               <i className="fas fa-laugh-wink" />
             </div>
             <div className="sidebar-brand-text mx-3">
-              <span>Brand</span>
+              <span>Journal</span>
             </div>
           </a>
           <hr className="sidebar-divider my-0" />
@@ -25,7 +25,7 @@ export default class Navbar extends React.Component {
               <hr className="sidebar-divider my-0" />
               <ul className="nav navbar-nav text-light" id="accordionSidebar">
                 <li className="nav-item" role="presentation">
-                  <a className="nav-link" href="index.html">
+                  <a className="nav-link" href="/dashboard">
                     <i className="fas fa-tachometer-alt" />
                     <span>&nbsp;Dashboard</span>
                   </a>

@@ -1,4 +1,5 @@
 import React from "react";
+import { review } from "../ethereum/app";
 import Navbar from "./components/DashboardNavbar";
 import Header from "./components/DashboardHeader";
 import Footer from "./components/DashboardFooter";
@@ -122,6 +123,23 @@ export default class Resource extends React.Component {
   state = {
     resources: tempData
   };
+
+  async getAllResourcesFromBlockChain() {
+    const { user } = this.props.store;
+    let i,
+      list = [];
+    for (i = 0; i < user.details.fileCount; i++) {
+      const file = await review.getUserFilebyIndex(i).call();
+      list.push({
+        id: i,
+        name: file[1],
+        hash: file[0],
+        rating: file[2]
+      });
+    }
+
+    return list;
+  }
 
   getAllResources() {
     var chunckedAry = chunk(this.state.resources, 3);

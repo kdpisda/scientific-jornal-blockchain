@@ -792,6 +792,13 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@tinymce/tinymce-react@^3.3.0":
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/@tinymce/tinymce-react/-/tinymce-react-3.3.0.tgz#a72c3539a4a559a6f7fa3ac2e0bc077f33fd8c55"
+  integrity sha512-pLewPrKdPJDvu22i0OjVZrsO+ALLvfD4FcxiwfkShGfCTWccwuS1Pky2rdLLoj5hib5z3WMcaMSy1hxX+G2xwQ==
+  dependencies:
+    prop-types "^15.6.2"
+
 "@types/node@^10.3.2":
   version "10.14.14"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.14.14.tgz#a47955df2acf76ba7f0ac3b205d325da193dc9ad"

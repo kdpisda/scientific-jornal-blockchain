@@ -8,7 +8,11 @@ export default class Index extends React.Component {
           <nav className="navbar navbar-light navbar-expand-md navigation-clean-button">
             <div className="container">
               <a className="navbar-brand" href="#">
+<<<<<<< HEAD
                 Scientific Journal
+=======
+                Journal
+>>>>>>> dev
               </a>
               <button
                 data-toggle="collapse"
@@ -27,33 +31,16 @@ export default class Index extends React.Component {
                   </li>
                   <li className="nav-item" role="presentation">
                     <a className="nav-link" href="#">
-                      Scientists
+                      Creators
                     </a>
                   </li>
-                  <li className="dropdown nav-item">
-                    <a
-                      className="dropdown-toggle nav-link"
-                      data-toggle="dropdown"
-                      aria-expanded="false"
-                      href="#"
-                    >
-                      Dropdown{" "}
+                  <li className="nav-item" role="presentation">
+                    <a className="nav-link" href="#">
+                      Users
                     </a>
-                    <div className="dropdown-menu" role="menu">
-                      <a className="dropdown-item" role="presentation" href="#">
-                        First Item
-                      </a>
-                      <a className="dropdown-item" role="presentation" href="#">
-                        Second Item
-                      </a>
-                      <a className="dropdown-item" role="presentation" href="#">
-                        Third Item
-                      </a>
-                    </div>
                   </li>
                 </ul>
                 <span className="navbar-text actions">
-                  {" "}
                   <a className="login" href="/login">
                     Log In
                   </a>
@@ -83,7 +70,7 @@ export default class Index extends React.Component {
                 style={{ backgroundColor: "#f2f2f2", border: 0 }}
               >
                 <div className="card-body text-center justify-content-center">
-                  <h4 className="card-title">Scientific Journal</h4>
+                  <h4 className="card-title">Open Journal</h4>
                   <h6 className="text-muted card-subtitle mb-2">
                     Powered by Blockchain
                   </h6>
@@ -219,7 +206,7 @@ export default class Index extends React.Component {
                   <a href="#">
                     <i className="icon ion-social-instagram" />
                   </a>
-                  <p className="copyright">Company Name © 2017</p>
+                  <p className="copyright">Shakti Shakti Shaktimaan © 2019</p>
                 </div>
               </div>
             </div>

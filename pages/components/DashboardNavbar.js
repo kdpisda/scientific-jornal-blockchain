@@ -52,7 +52,7 @@ export default class Navbar extends React.Component {
                       <div className="bg-white border rounded py-2 collapse-inner">
                         <h6 className="collapse-header">My Resources</h6>
                         <a className="collapse-item" href="/add">
-                          Add
+                          Add a Resource
                         </a>
                         <a className="collapse-item" href="/resources">
                           All Resources

@@ -4,6 +4,7 @@ import Navbar from "./components/DashboardNavbar";
 import Header from "./components/DashboardHeader";
 import Footer from "./components/DashboardFooter";
 import { inject } from "mobx-react";
+import StarRatings from "react-star-ratings";
 
 function chunk(array, size) {
   const chunked_arr = [];
@@ -20,12 +21,14 @@ export default class AddReview extends React.Component {
   state = {
     title: "",
     content: "",
-    review: ""
+    review: "",
+    rating: 1
   };
 
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.changeRating = this.changeRating.bind(this);
   }
 
   componentDidMount() {
@@ -40,6 +43,12 @@ export default class AddReview extends React.Component {
   handleSubmit() {
     //Do something to handle the submit
     console.log(this.state);
+  }
+
+  changeRating(newRating) {
+    this.setState({
+      rating: newRating
+    });
   }
 
   render() {
@@ -95,6 +104,26 @@ export default class AddReview extends React.Component {
                             this.setState({ review: event.target.value });
                           }}
                           value={this.state.review}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    <div className="card shadow mb-4">
+                      <div className="card-header d-flex justify-content-between align-items-center">
+                        <h6 className="text-primary font-weight-bold m-0">
+                          Please rate this resource
+                        </h6>
+                      </div>
+                      <div className="card-body">
+                        <StarRatings
+                          rating={this.state.rating}
+                          starRatedColor="blue"
+                          changeRating={this.changeRating}
+                          numberOfStars={5}
+                          name="rating"
                         />
                       </div>
                     </div>

@@ -32,7 +32,7 @@ export default class Navbar extends React.Component {
                 </li>
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
-                  <p className="mb-0">INTERFACE</p>
+                  <p className="mb-0">My Activities</p>
                 </div>
                 <li className="nav-item" role="presentation">
                   <div>
@@ -44,16 +44,18 @@ export default class Navbar extends React.Component {
                       href="#collapse-1"
                       role="button"
                     >
-                      <i className="fas fa-cog" />&nbsp;<span>Components</span>
+                      <i className="fas fa-mail-bulk" />
+                      &nbsp;
+                      <span>Resources</span>
                     </a>
                     <div className="collapse" id="collapse-1">
                       <div className="bg-white border rounded py-2 collapse-inner">
-                        <h6 className="collapse-header">CUSTOM COMPONENTS:</h6>
-                        <a className="collapse-item" href="buttons.html">
-                          Buttons
+                        <h6 className="collapse-header">My Resources</h6>
+                        <a className="collapse-item" href="/add">
+                          Add a Resource
                         </a>
-                        <a className="collapse-item" href="cards.html">
-                          Cards
+                        <a className="collapse-item" href="/resources">
+                          All Resources
                         </a>
                       </div>
                     </div>
@@ -69,29 +71,32 @@ export default class Navbar extends React.Component {
                       href="#collapse-2"
                       role="button"
                     >
-                      <i className="fas fa-wrench" />&nbsp;
-                      <span>Utilities</span>
+                      <i className="fas fa-book-reader" />
+                      &nbsp;
+                      <span>Browse</span>
                     </a>
                     <div className="collapse" id="collapse-2">
                       <div className="bg-white border rounded py-2 collapse-inner">
-                        <h6 className="collapse-header">CUSTOM UTILITIES:</h6>
+                        <h6 className="collapse-header">
+                          Search in Open Journal
+                        </h6>
                         <a
                           className="collapse-item"
                           href="utilities-color.html"
                         >
-                          Colors
+                          Posts
                         </a>
                         <a
                           className="collapse-item"
                           href="utilities-border.html"
                         >
-                          Borders
+                          Research Papers
                         </a>
                         <a
                           className="collapse-item"
                           href="utilities-animation.html"
                         >
-                          Animations
+                          Art
                         </a>
                         <a
                           className="collapse-item"
@@ -105,7 +110,7 @@ export default class Navbar extends React.Component {
                 </li>
                 <hr className="sidebar-divider" />
                 <div className="sidebar-heading">
-                  <p className="mb-0">Addons</p>
+                  <p className="mb-0">Settings</p>
                 </div>
                 <li className="nav-item" role="presentation">
                   <div>
@@ -117,29 +122,18 @@ export default class Navbar extends React.Component {
                       href="#collapse-3"
                       role="button"
                     >
-                      <i className="fas fa-folder" />&nbsp;<span>Pages</span>
+                      <i className="fas fa-user" />
+                      &nbsp;<span>Profile</span>
                     </a>
                     <div className="collapse" id="collapse-3">
                       <div className="bg-white border rounded py-2 collapse-inner">
-                        <h6 className="collapse-header">LOGIN SCREENS:</h6>
+                        <h6 className="collapse-header">Auth</h6>
                         <a className="collapse-item" href="login.html">
-                          Login
+                          Profile Settings
                         </a>
-                        <a className="collapse-item" href="register.html">
-                          Register
-                        </a>
-                        <a
-                          className="collapse-item"
-                          href="forgot-password.html"
-                        >
-                          Forgot Password
-                        </a>
-                        <h6 className="collapse-header">OTHER PAGES:</h6>
+                        <h6 className="collapse-header">Others</h6>
                         <a className="collapse-item" href="404.html">
-                          404 Page
-                        </a>
-                        <a className="collapse-item" href="blank.html">
-                          Blank Page
+                          Payment Methods
                         </a>
                       </div>
                     </div>
@@ -152,15 +146,12 @@ export default class Navbar extends React.Component {
                     aria-controls="collapsePages"
                   >
                     <div className="bg-white border rounded py-2 collapse-inner">
-                      <h6 className="collapse-header">LOGIN SCREENS:</h6>
+                      <h6 className="collapse-header">Auth</h6>
                       <a className="collapse-item" href="#">
-                        Login
+                        Profile
                       </a>
                       <a className="collapse-item" href="#">
-                        Register
-                      </a>
-                      <a className="collapse-item" href="#">
-                        Forgot Password
+                        Settings
                       </a>
                       <h6 className="collapse-header">OTHER PAGES:</h6>
                       <a className="collapse-item" href="#">
@@ -171,18 +162,6 @@ export default class Navbar extends React.Component {
                       </a>
                     </div>
                   </div>
-                </li>
-                <li className="nav-item" role="presentation">
-                  <a className="nav-link" href="charts.html">
-                    <i className="fas fa-chart-area" />
-                    <span>&nbsp;Charts</span>
-                  </a>
-                </li>
-                <li className="nav-item" role="presentation">
-                  <a className="nav-link" href="tables.html">
-                    <i className="fas fa-table" />
-                    <span>&nbsp;Tables</span>
-                  </a>
                 </li>
                 <hr className="sidebar-divider" />
               </ul>

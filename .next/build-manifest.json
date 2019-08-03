@@ -12,11 +12,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/add": [
+    "/dashboard": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/dashboard": [
+    "/login": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

@@ -1,11 +1,13 @@
 import React from "react";
 import Router from "next/router";
 import web3 from "../utils/helper";
+import { createUser } from "../ethereum/app";
 
 export default class Login extends React.Component {
   state = {
     account: "",
-    balance: ""
+    balance: "",
+    email: ""
   };
 
   componentDidMount() {
@@ -44,6 +46,7 @@ export default class Login extends React.Component {
   importTorus = () => {
     import("@toruslabs/torus-embed").then(this.enableTorus);
   };
+
   componentDidUnmount() {
     document.body.classList.remove("bg-gradient-primary");
   }
@@ -63,14 +66,30 @@ export default class Login extends React.Component {
                   <br />
 
                   <form className="user">
-                    <a
-                      className="btn btn-primary btn-block text-white btn-google btn-user"
-                      role="button"
-                      onClick={this.importTorus}
-                    >
-                      <i className="fab fa-google" />
-                      &nbsp; Signin with Google
-                    </a>
+                    <div className="input-group">
+                      <input
+                        className="bg-light form-control border-0 small"
+                        type="text"
+                        placeholder="Email"
+                        onChange={email => {
+                          this.setState({ email });
+                        }}
+                      />
+                      <div className="input-group-append">
+                        <button
+                          className="btn btn-primary py-0"
+                          type="button"
+                          onClick={() => {
+                            if (createUser(this.state.email))
+                              Router.push("/dashboard");
+                          }}
+                        >
+                          <i className="fas fa-envelope-square" />
+                        </button>
+                      </div>
+                    </div>
+                    <hr />
+                    <h2 className="text-center">OR</h2>
                     <a
                       className="btn btn-primary btn-block text-white btn-facebook btn-user"
                       role="button"

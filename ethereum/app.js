@@ -18,6 +18,9 @@ var store = new ethers.Contract(storeContractAddress, StoreABI, wallet);
 
 module.exports = {
   createUser: async email => review.createUser(email),
+  getUser: () => {
+    return "Any";
+  },
   getLength: async function() {
     console.log(review);
     return review

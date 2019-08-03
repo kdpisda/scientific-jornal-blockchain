@@ -11,6 +11,9 @@ class UserStore {
   @persist("object")
   @observable
   details = {};
+
+  @observable
+  hash = "";
 }
 
 export default UserStore;

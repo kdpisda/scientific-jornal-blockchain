@@ -1,4 +1,4 @@
-pragma solidity >=0.4.26;
+pragma solidity ^0.5.1;
 
 contract Review {
 
@@ -7,8 +7,7 @@ contract Review {
         string name;
         uint rating;
         string hash;
-        string[] comments;
-        address[] access;
+        string[] comment;
     }
 
     struct User {
@@ -18,113 +17,83 @@ contract Review {
         string[] files;
         mapping(string => File) files_map;
     }
-    
+
     mapping(address => User) public users;
-    
-    modifier newUser(address useraddress){
-        if(users[useraddress].isExist) revert("users exist");
+
+    modifier newUser(){
+        if(!users[msg.sender].isExist) revert("User Exists");
         _;
     }
-    modifier existUser(address useraddress){
-        if(!users[useraddress].isExist) revert("user does not exist");
-        _;
-    }
-    
-    modifier newFile(address useraddress, string memory hash){
-        if(users[useraddress].files_map[hash].isExist) revert();
-        _;
-    }
-    modifier existFile(address useraddress, string memory hash){
-        if(!users[useraddress].files_map[hash].isExist) revert();
-        _;
-    }
-    
-    modifier FileLength(address useraddress){
-        if(users[useraddress].files.length != 0) revert();
-        _;
-    }
-    
-     modifier isAccess(address useraddress, uint index){
-        string memory hash = users[useraddress].files[index];
-        if(users[useraddress].files_map[hash].access[0] != useraddress) revert();
+    modifier existUser(){
+        if(users[msg.sender].isExist) revert("User doesn't Exists");
         _;
     }
 
-    function createUser(address useraddress, string memory name) public newUser(useraddress) returns(bool){
-        string[] memory files;
-        users[useraddress] = User(true, msg.sender, name, files);
+    modifier newFile(string memory hash){
+        if(!users[msg.sender].files_map[hash].isExist) revert("File Exists");
+        _;
+    }
+    modifier existFile(string memory hash){
+        if(users[msg.sender].files_map[hash].isExist) revert("File doesn't Exists");
+        _;
+    }
+
+    modifier FileLength(){
+        if(users[msg.sender].files.length != 0) revert("No files");
+        _;
+    }
+
+    function createUser(string memory name) public newUser returns(bool){
+        User memory user;
+        user.userAddress = msg.sender;
+        user.isExist = true;
+        user.name = name;
+        users[msg.sender] = user;
         return true;
     }
-    
-    function getUser(address useraddress) public existUser(useraddress) view returns(string memory, uint){
-        return(users[useraddress].name, users[msg.sender].files.length);
+
+    function getUser() public existUser view returns(string memory, uint){
+        return(users[msg.sender].name, users[msg.sender].files.length);
     }
-    
-    function updateUser(address useraddress, string memory name) public existUser(useraddress) returns(bool){
-        users[useraddress].name = name;
+
+    function updateUser(string memory name) public existUser returns(bool){
+        users[msg.sender].name = name;
         return true;
     }
-    
-    function deleteUser(address useraddress) public existUser(useraddress) returns(bool){
-        users[useraddress].isExist = false;
+
+    function deleteUser() public existUser returns(bool){
+        users[msg.sender].isExist = false;
         return true;
     }
-    
-    function addFile(address useraddress, string memory hash, string memory name, uint rating) public existUser(useraddress) newFile(useraddress, hash) returns(bool){
+
+    function addFile(string memory hash, string memory name, uint rating) public existUser newFile(hash) existUser returns(bool){
         File memory file;
         file.hash = hash;
         file.isExist = true;
         file.rating = rating;
         file.name = name;
-        users[useraddress].files.push(hash);
-        users[useraddress].files_map[hash] = file;
-        users[useraddress].files_map[hash].access.push(useraddress);
+        users[msg.sender].files.push(hash);
+        users[msg.sender].files_map[hash] = file;
         return true;
     }
-    
-    function getUserFileLength(address useraddress) public view existUser(useraddress) FileLength(useraddress) returns(uint) {
-        return users[useraddress].files.length;
+
+    function getUserFileLength() public view existUser FileLength returns(uint) {
+        return users[msg.sender].files.length;
     }
-    
-    function getUserFilebyIndex(address useraddress, uint index) public existUser(useraddress) FileLength(useraddress) isAccess(useraddress, index) view returns(string memory, string memory, uint) {
-        string memory hash = users[useraddress].files[index];
+
+    function getUserFilebyIndex(uint index) public existUser FileLength view returns(string memory, string memory, uint) {
+        string memory hash = users[msg.sender].files[index];
         return (
             hash,
-            users[useraddress].files_map[hash].name,
-            users[useraddress].files_map[hash].rating
+            users[msg.sender].files_map[hash].name,
+            users[msg.sender].files_map[hash].rating
             );
     }
-    
-    function updateUserFilebyIndex(address useraddress, uint index, string memory name, uint rating) public existUser(useraddress) FileLength(useraddress) returns(bool) {
-        string memory hash = users[useraddress].files[index];
-        users[useraddress].files_map[hash].rating = rating;
-        users[useraddress].files_map[hash].name = name;
+
+    function updateUserFilebyIndex(uint index, string memory name, uint rating) public existUser FileLength returns(bool) {
+        string memory hash = users[msg.sender].files[index];
+        users[msg.sender].files_map[hash].rating = rating;
+        users[msg.sender].files_map[hash].name = name;
         return true;
     }
-    
-    function addComments(address useraddress, string memory hash, string memory comment)public returns(bool){
-        users[useraddress].files_map[hash].comments.push(comment);
-        return true;
-    }
-    
-    function getCommentsLength(address useraddress, string memory hash) public view returns(uint){
-        return users[useraddress].files_map[hash].comments.length;
-    }
-    
-    function getCommentById(address useraddress, string memory hash, uint id) public view returns(string memory){
-        return users[useraddress].files_map[hash].comments[id];
-    }
-    
-    function addAccessToUser(address useraddress, string memory hash)public payable existUser(useraddress) existUser(msg.sender) returns(bool){
-        users[useraddress].files_map[hash].access.push(msg.sender);
-        return true;
-    }
-    
-    function getAccessOfUser(address useraddress, string memory hash)public view existUser(useraddress) existUser(msg.sender) returns(bool){
-        for(uint i; i < users[useraddress].files_map[hash].access.length; i++){
-            if(users[useraddress].files_map[hash].access[i] == msg.sender) return true;
-        }
-        return false;
-    }
-    
 }

@@ -14,7 +14,7 @@ export default class Fab extends React.Component {
         title="Add a new resource"
         onClick={this.navigateToAdd}
       >
-        <i class="fas fa-plus" />
+        <i className="fas fa-plus" />
       </button>
     );
   }

@@ -1,11 +1,50 @@
 import React from "react";
+import Router from "next/router";
+import web3 from "../utils/helper";
 
 export default class Login extends React.Component {
-  componentDidMount(){
+  state = {
+    account: "",
+    balance: ""
+  };
+
+  componentDidMount() {
     document.body.classList.add("bg-gradient-primary");
+    console.log(web3);
+    // if not using store
+    setTimeout(() => {
+      if (window.web3) {
+        web3.eth.getAccounts().then(accounts => {
+          this.setState({ account: accounts[0] });
+        });
+      }
+    }, 1000);
   }
 
-  componentDidUnmount(){
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.state.account &&
+      this.state.account !== "" &&
+      prevState.account !== this.state.account
+    ) {
+      web3.eth.getBalance(this.state.account).then(balance => {
+        this.setState({ balance: web3.utils.fromWei(balance) });
+      });
+    }
+  }
+
+  enableTorus = () => {
+    window.ethereum.enable().then(accounts => {
+      this.setState({ account: accounts[0] });
+    });
+    window.torus.login(true);
+    Router.push("/dashboard");
+  };
+
+  importTorus = () => {
+    import("@toruslabs/torus-embed").then(this.enableTorus);
+  };
+  componentDidUnmount() {
     document.body.classList.remove("bg-gradient-primary");
   }
 
@@ -27,15 +66,18 @@ export default class Login extends React.Component {
                     <a
                       className="btn btn-primary btn-block text-white btn-google btn-user"
                       role="button"
+                      onClick={this.importTorus}
                     >
-                      <i className="fab fa-google" />&nbsp; Signin with Google
+                      <i className="fab fa-google" />
+                      &nbsp; Signin with Google
                     </a>
                     <a
                       className="btn btn-primary btn-block text-white btn-facebook btn-user"
                       role="button"
+                      onClick={() => Router.push("/dashboard")}
                     >
-                      <i className="fab fa-facebook-f" />&nbsp; Signin with
-                      Facebook
+                      <i className="fab fa-facebook-f" />
+                      &nbsp; Signin with Browser
                     </a>
                     <hr />
                   </form>

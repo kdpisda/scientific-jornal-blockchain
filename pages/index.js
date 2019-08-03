@@ -1,4 +1,5 @@
 import React from "react";
+import { getLength, createUser } from "../ethereum/app";
 
 export default class Index extends React.Component {
   render() {
@@ -8,15 +9,7 @@ export default class Index extends React.Component {
           <nav className="navbar navbar-light navbar-expand-md navigation-clean-button">
             <div className="container">
               <a className="navbar-brand" href="#">
-<<<<<<< HEAD
                 Journal
-=======
-<<<<<<< HEAD
-                Scientific Journal
-=======
-                Journal
->>>>>>> dev
->>>>>>> 21558b7c05eff06a3b5e5e1d1db35ab5ff5950b9
               </a>
               <button
                 data-toggle="collapse"

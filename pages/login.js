@@ -13,15 +13,6 @@ export default class Login extends React.Component {
 
   componentDidMount() {
     document.body.classList.add("bg-gradient-primary");
-    console.log(web3);
-    // if not using store
-    setTimeout(() => {
-      if (window.web3) {
-        web3.eth.getAccounts().then(accounts => {
-          this.setState({ account: accounts[0] });
-        });
-      }
-    }, 1000);
   }
 
   // componentDidUpdate(prevProps, prevState) {
@@ -73,10 +64,11 @@ export default class Login extends React.Component {
                       <input
                         className="bg-light form-control border-0 small"
                         type="text"
-                        placeholder="Email"
+                        placeholder="ETH Address"
                         onChange={event => {
                           this.setState({ account: event.target.value });
                         }}
+                        value={this.state.account}
                       />
                       <div className="input-group-append">
                         <button
@@ -90,6 +82,7 @@ export default class Login extends React.Component {
                                   user.address = this.state.account;
                                   user.details.name = response[0];
                                   user.details.fileCount = response[1];
+                                  Router.replace("/dashboard");
                                 })
                               )
                               .catch(e =>

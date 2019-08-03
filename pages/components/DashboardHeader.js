@@ -75,7 +75,7 @@ export default class Header extends React.Component {
                   href="#"
                 >
                   <span className="d-none d-lg-inline mr-2 text-gray-600 small">
-                    {user.address || "Anynomous"}
+                    <b>{user.details.name || "Anynomous"}</b> | {user.address}
                   </span>
                 </a>
                 <div

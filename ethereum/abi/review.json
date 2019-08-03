@@ -1,7 +1,116 @@
 [
   {
     "constant": false,
-    "inputs": [],
+    "inputs": [
+      {
+        "name": "useraddress",
+        "type": "address"
+      },
+      {
+        "name": "hash",
+        "type": "string"
+      }
+    ],
+    "name": "addAccessToUser",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "useraddress",
+        "type": "address"
+      },
+      {
+        "name": "hash",
+        "type": "string"
+      },
+      {
+        "name": "comment",
+        "type": "string"
+      },
+      {
+        "name": "rating",
+        "type": "uint256"
+      }
+    ],
+    "name": "addComments",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "useraddress",
+        "type": "address"
+      },
+      {
+        "name": "hash",
+        "type": "string"
+      },
+      {
+        "name": "name",
+        "type": "string"
+      }
+    ],
+    "name": "addFile",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "useraddress",
+        "type": "address"
+      },
+      {
+        "name": "name",
+        "type": "string"
+      }
+    ],
+    "name": "createUser",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "useraddress",
+        "type": "address"
+      }
+    ],
     "name": "deleteUser",
     "outputs": [
       {
@@ -16,6 +125,10 @@
   {
     "constant": false,
     "inputs": [
+      {
+        "name": "useraddress",
+        "type": "address"
+      },
       {
         "name": "name",
         "type": "string"
@@ -35,6 +148,10 @@
   {
     "constant": false,
     "inputs": [
+      {
+        "name": "useraddress",
+        "type": "address"
+      },
       {
         "name": "index",
         "type": "uint256"
@@ -61,8 +178,67 @@
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "getUserFileLength",
+    "inputs": [
+      {
+        "name": "useraddress",
+        "type": "address"
+      },
+      {
+        "name": "hash",
+        "type": "string"
+      }
+    ],
+    "name": "getAccessOfUser",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "useraddress",
+        "type": "address"
+      },
+      {
+        "name": "hash",
+        "type": "string"
+      },
+      {
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "getCommentById",
+    "outputs": [
+      {
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "useraddress",
+        "type": "address"
+      },
+      {
+        "name": "hash",
+        "type": "string"
+      }
+    ],
+    "name": "getCommentsLength",
     "outputs": [
       {
         "name": "",
@@ -74,27 +250,35 @@
     "type": "function"
   },
   {
-    "constant": false,
+    "constant": true,
     "inputs": [
       {
-        "name": "name",
-        "type": "string"
+        "name": "useraddress",
+        "type": "address"
       }
     ],
-    "name": "createUser",
+    "name": "getUser",
     "outputs": [
       {
         "name": "",
-        "type": "bool"
+        "type": "string"
+      },
+      {
+        "name": "",
+        "type": "uint256"
       }
     ],
     "payable": false,
-    "stateMutability": "nonpayable",
+    "stateMutability": "view",
     "type": "function"
   },
   {
     "constant": true,
     "inputs": [
+      {
+        "name": "useraddress",
+        "type": "address"
+      },
       {
         "name": "index",
         "type": "uint256"
@@ -121,13 +305,14 @@
   },
   {
     "constant": true,
-    "inputs": [],
-    "name": "getUser",
-    "outputs": [
+    "inputs": [
       {
-        "name": "",
-        "type": "string"
-      },
+        "name": "useraddress",
+        "type": "address"
+      }
+    ],
+    "name": "getUserFileLength",
+    "outputs": [
       {
         "name": "",
         "type": "uint256"
@@ -135,33 +320,6 @@
     ],
     "payable": false,
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "hash",
-        "type": "string"
-      },
-      {
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "name": "rating",
-        "type": "uint256"
-      }
-    ],
-    "name": "addFile",
-    "outputs": [
-      {
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {

@@ -3,45 +3,8 @@ import { review } from "../ethereum/app";
 import Navbar from "./components/DashboardNavbar";
 import Header from "./components/DashboardHeader";
 import Footer from "./components/DashboardFooter";
-import { inject } from "mobx-react";
-
-var tempData = [
-  {
-    title: "Hakima Matatu",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-  },
-  {
-    title: "Hakima Matatu",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-  },
-  {
-    title: "Hakima Matatu",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-  },
-  {
-    title: "Hakima Matatu",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-  },
-  {
-    title: "Hakima Matatu",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-  },
-  {
-    title: "Hakima Matatu",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-  },
-  {
-    title: "Hakima Matatu",
-    content:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-  }
-];
+import { inject, observer } from "mobx-react";
+import { runInAction, toJS } from "mobx";
 
 function chunk(array, size) {
   const chunked_arr = [];
@@ -54,10 +17,6 @@ function chunk(array, size) {
 }
 
 class ResourceRow extends React.Component {
-  constructor() {
-    super();
-  }
-
   render() {
     return (
       <div className="row">
@@ -67,7 +26,7 @@ class ResourceRow extends React.Component {
               <div className="card shadow mb-4" key={idx}>
                 <div className="card-header d-flex justify-content-between align-items-center">
                   <h6 className="text-primary font-weight-bold m-0">
-                    {resource.title}
+                    {resource.name}
                   </h6>
                   <div className="dropdown no-arrow">
                     <button
@@ -103,7 +62,14 @@ class ResourceRow extends React.Component {
                   </div>
                 </div>
                 <div className="card-body">
-                  <p className="m-0">{resource.content}</p>
+                  <div
+                    className="m-0"
+                    dangerouslySetInnerHTML={{
+                      __html: Buffer.from(resource.hash, "base64").toString(
+                        "ascii"
+                      )
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -115,6 +81,7 @@ class ResourceRow extends React.Component {
 }
 
 @inject("store")
+@observer
 export default class Resource extends React.Component {
   constructor() {
     super();
@@ -122,25 +89,29 @@ export default class Resource extends React.Component {
   }
 
   state = {
-    resources: tempData
+    resources: []
   };
 
   async getAllResourcesFromBlockChain() {
-    const { user } = this.props.store;
+    const { user, ui } = this.props.store;
     let i,
       list = [];
-    for (i = 0; i < user.details.fileCount; i++) {
-      review.getUserFilebyIndex(user.address, i).then(file => {
-        list.push({
-          id: i,
-          name: file[1],
-          hash: file[0],
-          rating: file[2]
-        });
-      });
-    }
 
-    return list;
+    if (ui.fetchedFromPersist) {
+      let count = await review.getUserFileLength(user.address);
+      count = parseInt(count._hex);
+      for (i = 0; i < count; i++) {
+        review.getUserFilebyIndex(user.address, i).then(file => {
+          list.push({
+            id: i,
+            name: file[1],
+            hash: file[0],
+            rating: file[2]
+          });
+          this.setState({ resources: list });
+        });
+      }
+    }
   }
 
   getAllResources() {
@@ -148,16 +119,18 @@ export default class Resource extends React.Component {
     return chunckedAry;
   }
 
-  componentDidMount() {
-    // this.getAllResourcesFromBlockChain(r => console.log(r)).catch(r =>
-    //   console.log(r)
-    // );
-    const { user } = this.props.store;
-    review.getUserFilebyIndex(user.address, 0);
+  componentWillMount() {
+    const { ui } = this.props.store;
+    this.getAllResourcesFromBlockChain().then(response =>
+      runInAction(() => {
+        ui.fetchList = true;
+      })
+    );
   }
 
   render() {
-    var resources = this.getAllResources();
+    const { ui } = this.props.store;
+
     return (
       <div id="page-top">
         <div id="wrapper">
@@ -170,9 +143,10 @@ export default class Resource extends React.Component {
                 <br />
               </div>
               <div className="container">
-                {resources.map(function(resource, idx) {
-                  return <ResourceRow key={idx} data={resource} />;
-                })}
+                {ui.fetchedFromPersist &&
+                  chunk(this.state.resources, 3).map(function(resource, idx) {
+                    return <ResourceRow key={idx} data={resource} />;
+                  })}
               </div>
             </div>
             <Footer />

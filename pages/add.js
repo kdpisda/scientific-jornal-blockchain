@@ -1,5 +1,6 @@
 import React from "react";
 import { inject } from "mobx-react";
+import Router from "next/router";
 import { Editor } from "@tinymce/tinymce-react";
 import Navbar from "./components/DashboardNavbar";
 import Header from "./components/DashboardHeader";
@@ -32,7 +33,10 @@ export default class Dashboard extends React.Component {
     // addFile(address useraddress, string memory hash, string memory name, uint rating)
     review
       .addFile(user.address, s, this.state.title.toString(), 0)
-      .then(r => console.log(r))
+      .then(r => {
+        console.log(r);
+        Router.push("/resources");
+      })
       .catch(e => console.log(e));
     // review.newFile(hash);
   }

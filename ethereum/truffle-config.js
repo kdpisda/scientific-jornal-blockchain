@@ -75,10 +75,10 @@ module.exports = {
     },
     matic: {
       provider: function() {
-        return new HDWalletProvider(mnemonic, `https://testnet.matic.network`);
+        return new HDWalletProvider(mnemonic, `https://testnet2.matic.network`);
       },
-      network_id: 13,
-      gas: 400000000
+      network_id: 8995,
+      gasPrice: 0
     }
 
     // Useful for private networks

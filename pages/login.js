@@ -1,6 +1,46 @@
 import React from "react";
+import web3 from "../utils/helper";
 
 export default class Login extends React.Component {
+  state = {
+    account: "",
+    balance: ""
+  };
+
+  componentDidMount() {
+    console.log(web3);
+    // if not using store
+    setTimeout(() => {
+      if (window.web3) {
+        web3.eth.getAccounts().then(accounts => {
+          this.setState({ account: accounts[0] });
+        });
+      }
+    }, 1000);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.state.account &&
+      this.state.account !== "" &&
+      prevState.account !== this.state.account
+    ) {
+      web3.eth.getBalance(this.state.account).then(balance => {
+        this.setState({ balance: web3.utils.fromWei(balance) });
+      });
+    }
+  }
+
+  enableTorus = () => {
+    window.ethereum.enable().then(accounts => {
+      this.setState({ account: accounts[0] });
+    });
+  };
+
+  importTorus = () => {
+    import("@toruslabs/torus-embed").then(this.enableTorus);
+  };
+
   render() {
     return (
       <div className="container">
@@ -19,17 +59,21 @@ export default class Login extends React.Component {
                     <a
                       className="btn btn-primary btn-block text-white btn-google btn-user"
                       role="button"
+                      onClick={this.importTorus}
                     >
-                      <i className="fab fa-google" />&nbsp; Signin with Google
+                      <i className="fab fa-google" />
+                      &nbsp; Signin with Google
                     </a>
                     <a
                       className="btn btn-primary btn-block text-white btn-facebook btn-user"
                       role="button"
                     >
-                      <i className="fab fa-facebook-f" />&nbsp; Signin with
-                      Facebook
+                      <i className="fab fa-facebook-f" />
+                      &nbsp; Signin with Facebook
                     </a>
                     <hr />
+                    <div>Account: {this.state.account}</div>
+                    <div>Balance: {this.state.balance}</div>
                   </form>
                   <div className="text-center">
                     <a className="small" href="/register">

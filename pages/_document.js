@@ -45,6 +45,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="./static/css/styles.min.css?h=48930a4107b1ca5eb39ae1e606c0ea3f"
           />
+          <line rel="stylesheet" href="./static/css/index.css" />
           <link rel="stylesheet" href="./static/css/index.css" />
           <link
             rel="stylesheet"
@@ -67,6 +68,7 @@ export default class MyDocument extends Document {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js" />
+        <script stc="./static/js/popper.min.js" />
         <script src="./static/js/script.min.js?h=5f9b75209a5bec2eae9db1b514298205" />
       </html>
     );

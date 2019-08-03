@@ -1,5 +1,5 @@
-const reviewSol = artifacts.require("./review.sol");
-const storeSol = artifacts.require("./store.sol");
+const reviewSol = artifacts.require("./Review.sol");
+const storeSol = artifacts.require("./Store.sol");
 
 module.exports = function(deployer) {
   deployer.deploy(reviewSol).then(r => {

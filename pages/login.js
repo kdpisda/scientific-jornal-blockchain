@@ -1,37 +1,31 @@
 import React from "react";
 import Router from "next/router";
 import web3 from "../utils/helper";
+import { review, createUser, wallet } from "../ethereum/app";
+import { inject } from "mobx-react";
+import { runInAction } from "mobx";
 
+@inject("store")
 export default class Login extends React.Component {
   state = {
-    account: "",
-    balance: ""
+    account: ""
   };
 
   componentDidMount() {
     document.body.classList.add("bg-gradient-primary");
-    console.log(web3);
-    // if not using store
-    setTimeout(() => {
-      if (window.web3) {
-        web3.eth.getAccounts().then(accounts => {
-          this.setState({ account: accounts[0] });
-        });
-      }
-    }, 1000);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      this.state.account &&
-      this.state.account !== "" &&
-      prevState.account !== this.state.account
-    ) {
-      web3.eth.getBalance(this.state.account).then(balance => {
-        this.setState({ balance: web3.utils.fromWei(balance) });
-      });
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (
+  //     this.state.account &&
+  //     this.state.account !== "" &&
+  //     prevState.account !== this.state.account
+  //   ) {
+  //     web3.eth.getBalance(this.state.account).then(balance => {
+  //       this.setState({ balance: web3.utils.fromWei(balance) });
+  //     });
+  //   }
+  // }
 
   enableTorus = () => {
     window.ethereum.enable().then(accounts => {
@@ -44,11 +38,14 @@ export default class Login extends React.Component {
   importTorus = () => {
     import("@toruslabs/torus-embed").then(this.enableTorus);
   };
-  componentDidUnmount() {
+
+  componentWillUnmount() {
     document.body.classList.remove("bg-gradient-primary");
   }
 
   render() {
+    const { user } = this.props.store;
+    if (user.address !== "guesttoken") Router.replace("/dashboard");
     return (
       <div className="container">
         <div className="row">
@@ -63,14 +60,44 @@ export default class Login extends React.Component {
                   <br />
 
                   <form className="user">
-                    <a
-                      className="btn btn-primary btn-block text-white btn-google btn-user"
-                      role="button"
-                      onClick={this.importTorus}
-                    >
-                      <i className="fab fa-google" />
-                      &nbsp; Signin with Google
-                    </a>
+                    <div className="input-group">
+                      <input
+                        className="bg-light form-control border-0 small"
+                        type="text"
+                        placeholder="ETH Address"
+                        onChange={event => {
+                          this.setState({ account: event.target.value });
+                        }}
+                        value={this.state.account}
+                      />
+                      <div className="input-group-append">
+                        <button
+                          className="btn btn-primary py-0"
+                          type="button"
+                          onClick={() => {
+                            review
+                              .getUser(this.state.account)
+                              .then(response =>
+                                runInAction(() => {
+                                  user.address = this.state.account;
+                                  user.details.name = response[0];
+                                  user.details.fileCount = response[1];
+                                  Router.replace("/dashboard");
+                                })
+                              )
+                              .catch(e =>
+                                console.log("*******************", e)
+                              );
+                            // if (console.log(createUser(this.state.email)))
+                            //   Router.push("/dashboard");
+                          }}
+                        >
+                          <i className="fas fa-envelope-square" />
+                        </button>
+                      </div>
+                    </div>
+                    <hr />
+                    <h2 className="text-center">OR</h2>
                     <a
                       className="btn btn-primary btn-block text-white btn-facebook btn-user"
                       role="button"

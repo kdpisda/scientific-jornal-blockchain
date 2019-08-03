@@ -1,11 +1,16 @@
 import React from "react";
+import Router from "next/router";
 import Navbar from "./components/DashboardNavbar";
 import FAB from "./components/FabToAdd";
 import Header from "./components/DashboardHeader";
 import Footer from "./components/DashboardFooter";
+import { inject } from "mobx-react";
+import { runInAction } from "mobx";
 
+@inject("store")
 export default class Dashboard extends React.Component {
   render() {
+    const { user } = this.props.store;
     return (
       <div id="page-top">
         <div id="wrapper">
@@ -17,12 +22,17 @@ export default class Dashboard extends React.Component {
                 <div className="d-sm-flex justify-content-between align-items-center mb-4">
                   <h3 className="text-dark mb-0">Dashboard</h3>
                   <a
-                    className="btn btn-primary btn-sm d-none d-sm-inline-block"
+                    className="btn btn-primary btn-sm d-none d-sm-inline-block text-white"
                     role="button"
-                    href="#"
+                    onClick={() =>
+                      runInAction(() => {
+                        user.address = "guesttoken";
+                        Router.replace("/");
+                      })
+                    }
                   >
-                    <i className="fas fa-download fa-sm text-white-50" />
-                    &nbsp;Generate Report
+                    <i className="fas fa-sign-out-alt fa-sm text-white" />
+                    &nbsp;Logout
                   </a>
                 </div>
                 <div className="row">

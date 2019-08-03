@@ -5,6 +5,7 @@ import Header from "./components/DashboardHeader";
 import Footer from "./components/DashboardFooter";
 import { inject, observer } from "mobx-react";
 import { runInAction, toJS } from "mobx";
+import LoaderClass from "../utils/loader";
 
 function chunk(array, size) {
   const chunked_arr = [];
@@ -96,6 +97,7 @@ export default class Resource extends React.Component {
     const { user, ui } = this.props.store;
     let i,
       list = [];
+    ui.isLoading = true;
 
     if (ui.fetchedFromPersist) {
       let count = await review.getUserFileLength(user.address);
@@ -109,6 +111,7 @@ export default class Resource extends React.Component {
             rating: file[2]
           });
           this.setState({ resources: list });
+          ui.isLoading = false;
         });
       }
     }
@@ -143,6 +146,7 @@ export default class Resource extends React.Component {
                 <br />
               </div>
               <div className="container">
+                {ui.isLoading && <LoaderClass />}
                 {ui.fetchedFromPersist &&
                   chunk(this.state.resources, 3).map(function(resource, idx) {
                     return <ResourceRow key={idx} data={resource} />;

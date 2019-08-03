@@ -21,25 +21,25 @@ contract Review {
     mapping(address => User) public users;
 
     modifier newUser(){
-        if(!users[msg.sender].isExist) revert();
+        if(!users[msg.sender].isExist) revert("User Exists");
         _;
     }
     modifier existUser(){
-        if(users[msg.sender].isExist) revert();
+        if(users[msg.sender].isExist) revert("User doesn't Exists");
         _;
     }
 
     modifier newFile(string memory hash){
-        if(!users[msg.sender].files_map[hash].isExist) revert();
+        if(!users[msg.sender].files_map[hash].isExist) revert("File Exists");
         _;
     }
     modifier existFile(string memory hash){
-        if(users[msg.sender].files_map[hash].isExist) revert();
+        if(users[msg.sender].files_map[hash].isExist) revert("File doesn't Exists");
         _;
     }
 
     modifier FileLength(){
-        if(users[msg.sender].files.length != 0) revert();
+        if(users[msg.sender].files.length != 0) revert("No files");
         _;
     }
 

@@ -4,7 +4,7 @@ import Router from "next/router";
 import { runInAction } from "mobx";
 import { review } from "../ethereum/app";
 
-@inject("mobx")
+@inject("store")
 export default class Register extends React.Component {
   state = {
     name: "",
@@ -14,7 +14,7 @@ export default class Register extends React.Component {
     document.body.classList.add("bg-gradient-primary");
   }
 
-  componentDidUnmount() {
+  componentWillUnmount() {
     document.body.classList.remove("bg-gradient-primary");
   }
 
@@ -92,13 +92,6 @@ export default class Register extends React.Component {
                     >
                       <i className="fab fa-google" />
                       &nbsp; Register
-                    </a>
-                    <a
-                      className="btn btn-primary btn-block text-white btn-facebook btn-user"
-                      role="button"
-                    >
-                      <i className="fab fa-facebook-f" />
-                      &nbsp; Register with Facebook
                     </a>
                     <hr />
                   </form>

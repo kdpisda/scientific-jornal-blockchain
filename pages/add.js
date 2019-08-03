@@ -12,8 +12,8 @@ export default class Dashboard extends React.Component {
   constructor() {
     super();
     this.state = {
-      resource: null,
-      title: null
+      resource: "",
+      title: ""
     };
     this.saveResource = this.saveResource.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
@@ -28,11 +28,11 @@ export default class Dashboard extends React.Component {
     console.log(this.state);
     const { user } = this.props.store;
 
-    var b = new Buffer(this.state.resource.toString());
+    var b = new Buffer(this.state.resource.toString() + new Date());
     var s = b.toString("base64");
     // addFile(address useraddress, string memory hash, string memory name, uint rating)
     review
-      .addFile(user.address, s, this.state.title.toString(), 0)
+      .addFile(user.address, s, this.state.title.toString())
       .then(r => {
         console.log(r);
         Router.push("/resources");

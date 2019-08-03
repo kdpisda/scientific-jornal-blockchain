@@ -5,10 +5,14 @@ export default class Navbar extends React.Component {
     return (
       <nav className="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
         <div className="container-fluid d-flex flex-column p-0">
+<<<<<<< HEAD
           <a
             className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0"
             href="/"
           >
+=======
+          <a className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/" >
+>>>>>>> 21558b7c05eff06a3b5e5e1d1db35ab5ff5950b9
             <div className="sidebar-brand-icon rotate-n-15">
               <i className="fas fa-laugh-wink" />
             </div>

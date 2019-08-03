@@ -1,11 +1,4 @@
-import ReviewABI from "./abi/review.json";
-import StoreABI from "./abi/store.json";
-
 const Web3 = require("web3");
-let account = null;
-let airbnbContract;
-let reviewContractAddress = "0x692a70d2e424a56d2c6c27aa97d1a86395877b3a";
-let storeContractAddress = "0xbbf289d846208c16edc8474705c748aff07732db";
 
 // "https://ropsten.infura.io/v3/34db7aa51a29454db3a3b3b68abd92ca"
 

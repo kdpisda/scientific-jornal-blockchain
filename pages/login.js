@@ -80,7 +80,7 @@ export default class Login extends React.Component {
                           className="btn btn-primary py-0"
                           type="button"
                           onClick={() => {
-                            if (createUser(this.state.email))
+                            if (console.log(createUser(this.state.email)))
                               Router.push("/dashboard");
                           }}
                         >

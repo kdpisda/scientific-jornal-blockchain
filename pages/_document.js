@@ -70,11 +70,11 @@ export default class MyDocument extends Document {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js" />
         <script stc="./static/js/popper.min.js" />
         <script src="./static/js/script.min.js?h=5f9b75209a5bec2eae9db1b514298205" />
-        <script
+        {/* <script
           src="https://app.tor.us/v0.0.20/embed.min.js"
           integrity="sha384-tDTJ86ig+B5z7vXffrWKaBLC8dOCtiSV4a6OjWboyxfvcFNyL9Udxcld4kj1Wxny"
           crossOrigin="anonymous"
-        />
+        /> */}
       </html>
     );
   }

@@ -2,7 +2,13 @@ import React from "react";
 import { getUser } from "../../ethereum/app";
 
 export default class Header extends React.Component {
+  state = {
+    user: null
+  };
+
   render() {
+    getUser().then(user => this.setState({ user }));
+    console.log(this.state.user);
     return (
       <nav className="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
         <div className="container-fluid">
@@ -68,7 +74,7 @@ export default class Header extends React.Component {
                   href="#"
                 >
                   <span className="d-none d-lg-inline mr-2 text-gray-600 small">
-                    {getUser() || "Anynomous"}
+                    {"Anynomous"}
                   </span>
                 </a>
                 <div

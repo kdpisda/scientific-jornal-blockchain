@@ -1,35 +1,64 @@
 var ethers = require("ethers");
 
-let web3Provider = ethers.getDefaultProvider("ropsten");
+let web3Provider = new ethers.providers.JsonRpcProvider(
+  `https://testnet2.matic.network`
+);
 
-let reviewContractAddress = "0x7a3c74a2e4be2b6e305252d94ae386bfaeef5e07";
+let reviewContractAddress = "0x3f4cdf3176b7ffb865e52a2b328707d2a9d5f5df";
 let storeContractAddress = "0xd71a648cf882ed954037136ee961f0db53e1689b";
 
 let privateKey =
   "toss strong carpet cloth twin nominee cave skull fog gap enroll toy";
 
-import ReviewABI from "./abi/review.json";
-import StoreABI from "./abi/store.json";
+import ReviewABI from "./build/contracts/Review";
+import StoreABI from "./build/contracts/Store";
 
 let wallet = ethers.Wallet.fromMnemonic(privateKey).connect(web3Provider);
 
-var review = new ethers.Contract(reviewContractAddress, ReviewABI, wallet);
-var store = new ethers.Contract(storeContractAddress, StoreABI, wallet);
+var review = new ethers.Contract(reviewContractAddress, ReviewABI.abi, wallet);
+var store = new ethers.Contract(storeContractAddress, StoreABI.abi, wallet);
 
 module.exports = {
-  createUser: async email => review.createUser(email),
-  getUser: () => {
-    return "Any";
-  },
-  getLength: async function() {
+  createUser: async email => {
     console.log(review);
-    return review
-      .getLength()
-      .then(function(result) {
-        return result;
-      })
-      .catch(function(e) {
-        return e;
-      });
-  }
+    review
+      .createUser(email)
+      .then(r => r)
+      .catch(e => console.log(e));
+  },
+  getUser: async () =>
+    review
+      .getUser()
+      .then(r => r)
+      .catch(e => console.log(e)),
+  updateUser: async email =>
+    review
+      .updateUser(email)
+      .then(r => r)
+      .catch(e => console.log(e)),
+  deleteUser: async () =>
+    review
+      .deleteUser()
+      .then(r => r)
+      .catch(e => console.log(e)),
+  addFile: async (hash, email, rating) =>
+    review
+      .addFile(hash, email, rating)
+      .then(r => r)
+      .catch(e => console.log(e)),
+  getUserFileLength: async () =>
+    review
+      .getUserFileLength()
+      .then(r => r)
+      .catch(e => console.log(e)),
+  getUserFilebyIndex: async index =>
+    review
+      .getUserFilebyIndex(index)
+      .then(r => r)
+      .catch(e => console.log(e)),
+  updateUserFilebyIndex: async (index, name, rating) =>
+    review
+      .updateUserFilebyIndex(index, name, rating)
+      .then(r => r)
+      .catch(e => console.log(e))
 };

@@ -23,9 +23,17 @@ export default class Dashboard extends React.Component {
     this.setState({ resource: e.target.getContent() });
   };
 
-  saveResource() {
+  async saveResource() {
     console.log(this.state);
-    // review.addFile(hash, name, rating);
+    const { user } = this.props.store;
+
+    var b = new Buffer(this.state.resource.toString());
+    var s = b.toString("base64");
+    // addFile(address useraddress, string memory hash, string memory name, uint rating)
+    review
+      .addFile(user.address, s, this.state.title.toString(), 0)
+      .then(r => console.log(r))
+      .catch(e => console.log(e));
     // review.newFile(hash);
   }
 

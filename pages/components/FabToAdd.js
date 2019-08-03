@@ -2,7 +2,7 @@ import React from "react";
 
 export default class Fab extends React.Component {
   navigateToAdd() {
-    window.location.replace('/add');
+    window.location.replace("/add");
   }
 
   render() {
@@ -14,7 +14,7 @@ export default class Fab extends React.Component {
         title="Add a new resource"
         onClick={this.navigateToAdd}
       >
-        <i class="fas fa-plus" />
+        <i className="fas fa-plus" />
       </button>
     );
   }

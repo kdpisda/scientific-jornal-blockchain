@@ -2,12 +2,12 @@ import React from "react";
 import Router from "next/router";
 import web3 from "../utils/helper";
 import { review, createUser, wallet } from "../ethereum/app";
+import { inject } from "mobx-react";
 
+@inject("store")
 export default class Login extends React.Component {
   state = {
-    account: "",
-    balance: "",
-    email: ""
+    account: ""
   };
 
   componentDidMount() {
@@ -23,17 +23,17 @@ export default class Login extends React.Component {
     }, 1000);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      this.state.account &&
-      this.state.account !== "" &&
-      prevState.account !== this.state.account
-    ) {
-      web3.eth.getBalance(this.state.account).then(balance => {
-        this.setState({ balance: web3.utils.fromWei(balance) });
-      });
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (
+  //     this.state.account &&
+  //     this.state.account !== "" &&
+  //     prevState.account !== this.state.account
+  //   ) {
+  //     web3.eth.getBalance(this.state.account).then(balance => {
+  //       this.setState({ balance: web3.utils.fromWei(balance) });
+  //     });
+  //   }
+  // }
 
   enableTorus = () => {
     window.ethereum.enable().then(accounts => {
@@ -52,6 +52,8 @@ export default class Login extends React.Component {
   }
 
   render() {
+    const { user } = this.props.store;
+    if (user.address !== "guesttoken") Router.replace("/dashboard");
     return (
       <div className="container">
         <div className="row">
@@ -71,8 +73,8 @@ export default class Login extends React.Component {
                         className="bg-light form-control border-0 small"
                         type="text"
                         placeholder="Email"
-                        onChange={email => {
-                          this.setState({ email });
+                        onChange={event => {
+                          this.setState({ account: event.target.value });
                         }}
                       />
                       <div className="input-group-append">
@@ -80,14 +82,14 @@ export default class Login extends React.Component {
                           className="btn btn-primary py-0"
                           type="button"
                           onClick={() => {
-                            console.log(web3.eth.accounts[0]);
                             review
-                              .createUser(
-                                "0xbc848c44a72D878aA935CccFe3e307c4e2DB0146",
-                                "Vinay Khobragade"
-                              )
-                              .then(e => console.log(e))
-                              .catch(e => console.log(e));
+                              .getUser(this.state.account)
+                              .then(response => {
+                                user.address = this.state.account;
+                              })
+                              .catch(e =>
+                                console.log("*******************", e)
+                              );
                             // if (console.log(createUser(this.state.email)))
                             //   Router.push("/dashboard");
                           }}

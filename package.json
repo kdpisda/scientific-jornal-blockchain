@@ -9,7 +9,11 @@
     "@tinymce/tinymce-react": "^3.3.0",
     "@toruslabs/torus-embed": "^0.0.22",
     "babel-plugin-module-resolver": "^3.1.2",
+    "localforage": "^1.7.3",
     "maticjs": "^1.0.0-beta.14",
+    "mobx": "^5.9.0",
+    "mobx-persist": "^0.4.1",
+    "mobx-react": "^5.4.3",
     "next": "latest",
     "next-routes": "^1.4.2",
     "react": "^16.7.0",
@@ -19,5 +23,9 @@
     "truffle-contract": "^4.0.27",
     "truffle-hdwallet-provider": "^1.0.15",
     "web3": "^1.2.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.1.0"
   }
 }

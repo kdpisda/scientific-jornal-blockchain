@@ -8,7 +8,7 @@ import { review } from "../ethereum/app";
 export default class Register extends React.Component {
   state = {
     name: "",
-    ethAddress: ""
+    address: ""
   };
   componentDidMount() {
     document.body.classList.add("bg-gradient-primary");
@@ -56,11 +56,11 @@ export default class Register extends React.Component {
                         id="ethAdd"
                         aria-describedby="nameHelp"
                         placeholder="ETH Address"
-                        name="ethAddress"
+                        name="address"
                         onChange={event => {
-                          this.setState({ ethAddress: event.target.value });
+                          this.setState({ address: event.target.value });
                         }}
-                        value={this.state.ethAddress}
+                        value={this.state.address}
                       />
                     </div>
                     <hr />
@@ -71,19 +71,7 @@ export default class Register extends React.Component {
                         review
                           .createUser(this.state.address, this.state.name)
                           .then(response => {
-                            review
-                              .getUser(this.state.address)
-                              .then(response =>
-                                runInAction(() => {
-                                  user.address = this.state.account;
-                                  user.details.name = response[0];
-                                  user.details.fileCount = response[1];
-                                  Router.replace("/dashboard");
-                                })
-                              )
-                              .catch(e =>
-                                console.log("*******************", e)
-                              );
+                            Router.replace("/login");
                           })
                           .catch(e => {
                             console.log(e);

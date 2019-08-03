@@ -154,10 +154,7 @@ export default class Dashboard extends React.Component {
                                   type="checkbox"
                                   id="formCheck-1"
                                 />
-                                <label
-                                  className="custom-control-label"
-                                  for="formCheck-1"
-                                />
+                                <label className="custom-control-label" />
                               </div>
                             </div>
                           </div>
@@ -177,10 +174,7 @@ export default class Dashboard extends React.Component {
                                   type="checkbox"
                                   id="formCheck-2"
                                 />
-                                <label
-                                  className="custom-control-label"
-                                  for="formCheck-2"
-                                />
+                                <label className="custom-control-label" />
                               </div>
                             </div>
                           </div>
@@ -200,10 +194,7 @@ export default class Dashboard extends React.Component {
                                   type="checkbox"
                                   id="formCheck-3"
                                 />
-                                <label
-                                  className="custom-control-label"
-                                  for="formCheck-3"
-                                />
+                                <label className="custom-control-label" />
                               </div>
                             </div>
                           </div>
@@ -234,10 +225,7 @@ export default class Dashboard extends React.Component {
                                   type="checkbox"
                                   id="formCheck-1"
                                 />
-                                <label
-                                  className="custom-control-label"
-                                  for="formCheck-1"
-                                />
+                                <label className="custom-control-label" />
                               </div>
                             </div>
                           </div>
@@ -257,10 +245,7 @@ export default class Dashboard extends React.Component {
                                   type="checkbox"
                                   id="formCheck-2"
                                 />
-                                <label
-                                  className="custom-control-label"
-                                  for="formCheck-2"
-                                />
+                                <label className="custom-control-label" />
                               </div>
                             </div>
                           </div>
@@ -280,10 +265,7 @@ export default class Dashboard extends React.Component {
                                   type="checkbox"
                                   id="formCheck-3"
                                 />
-                                <label
-                                  className="custom-control-label"
-                                  for="formCheck-3"
-                                />
+                                <label className="custom-control-label" />
                               </div>
                             </div>
                           </div>

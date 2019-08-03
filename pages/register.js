@@ -1,14 +1,14 @@
 import React from "react";
 
 export default class Register extends React.Component {
-  componentDidMount(){
+  componentDidMount() {
     document.body.classList.add("bg-gradient-primary");
   }
 
-  componentDidUnmount(){
+  componentDidUnmount() {
     document.body.classList.remove("bg-gradient-primary");
   }
-  
+
   render() {
     return (
       <div className="container">
@@ -28,14 +28,15 @@ export default class Register extends React.Component {
                       className="btn btn-primary btn-block text-white btn-google btn-user"
                       role="button"
                     >
-                      <i className="fab fa-google" />&nbsp; Register with Google
+                      <i className="fab fa-google" />
+                      &nbsp; Register with Google
                     </a>
                     <a
                       className="btn btn-primary btn-block text-white btn-facebook btn-user"
                       role="button"
                     >
-                      <i className="fab fa-facebook-f" />&nbsp; Register with
-                      Facebook
+                      <i className="fab fa-facebook-f" />
+                      &nbsp; Register with Facebook
                     </a>
                     <hr />
                   </form>

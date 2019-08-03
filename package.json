@@ -11,6 +11,9 @@
     "react": "^16.7.0",
     "react-art": "^16.5.2",
     "react-dom": "^16.7.0",
-    "react-native-web": "^0.9.3"
+    "react-native-web": "^0.9.3",
+    "truffle-contract": "^4.0.27",
+    "truffle-hdwallet-provider": "^1.0.15",
+    "web3": "^1.2.0"
   }
 }

@@ -2,12 +2,7 @@ import React from "react";
 import { getLength, createUser } from "../ethereum/app";
 
 export default class Index extends React.Component {
-  // createUser() {
-
-  // }
-
   render() {
-    createUser("Hello world", 1, "thisisalonghash");
     return (
       <React.Fragment>
         <div>

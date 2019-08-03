@@ -67,44 +67,42 @@ export default class Header extends React.Component {
             </li>
             <div className="d-none d-sm-block topbar-divider" />
             <li className="nav-item dropdown no-arrow" role="presentation">
-              <li className="nav-item dropdown no-arrow">
+              <a
+                className="dropdown-toggle nav-link"
+                data-toggle="dropdown"
+                aria-expanded="false"
+                href="#"
+              >
+                <span className="d-none d-lg-inline mr-2 text-gray-600 small">
+                  <b>{user.details.name || "Anynomous"}</b> | {user.address}
+                </span>
+              </a>
+              <div
+                className="dropdown-menu shadow dropdown-menu-right animated--grow-in"
+                role="menu"
+              >
                 <a
-                  className="dropdown-toggle nav-link"
-                  data-toggle="dropdown"
-                  aria-expanded="false"
-                  href="#"
+                  className="dropdown-item"
+                  role="presentation"
+                  href="/profile"
                 >
-                  <span className="d-none d-lg-inline mr-2 text-gray-600 small">
-                    <b>{user.details.name || "Anynomous"}</b> | {user.address}
-                  </span>
+                  <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
+                  &nbsp;Profile
                 </a>
-                <div
-                  className="dropdown-menu shadow dropdown-menu-right animated--grow-in"
-                  role="menu"
-                >
-                  <a
-                    className="dropdown-item"
-                    role="presentation"
-                    href="/profile"
-                  >
-                    <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
-                    &nbsp;Profile
-                  </a>
-                  <a className="dropdown-item" role="presentation" href="#">
-                    <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" />
-                    &nbsp;Settings
-                  </a>
-                  <a className="dropdown-item" role="presentation" href="#">
-                    <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400" />
-                    &nbsp;Activity log
-                  </a>
-                  <div className="dropdown-divider" />
-                  <a className="dropdown-item" role="presentation" href="#">
-                    <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
-                    &nbsp;Logout
-                  </a>
-                </div>
-              </li>
+                <a className="dropdown-item" role="presentation" href="#">
+                  <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400" />
+                  &nbsp;Settings
+                </a>
+                <a className="dropdown-item" role="presentation" href="#">
+                  <i className="fas fa-list fa-sm fa-fw mr-2 text-gray-400" />
+                  &nbsp;Activity log
+                </a>
+                <div className="dropdown-divider" />
+                <a className="dropdown-item" role="presentation" href="#">
+                  <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
+                  &nbsp;Logout
+                </a>
+              </div>
             </li>
           </ul>
         </div>

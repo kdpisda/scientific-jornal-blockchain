@@ -16,6 +16,9 @@ class UIStore {
   @observable isError = false;
   @observable errorMessage = "Error";
 
+  @observable tempList = [];
+  @observable fetchList = false;
+
   @observable
   fetchedFromPersist = false;
 }

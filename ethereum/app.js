@@ -4,7 +4,7 @@ let web3Provider = new ethers.providers.JsonRpcProvider(
   `https://testnet2.matic.network`
 );
 
-let reviewContractAddress = "0x457639f21941be0983bd2e03f2846799d46194c3";
+let reviewContractAddress = "0x7a3c74a2e4be2b6e305252d94ae386bfaeef5e07";
 let storeContractAddress = "0xd71a648cf882ed954037136ee961f0db53e1689b";
 
 let privateKey =

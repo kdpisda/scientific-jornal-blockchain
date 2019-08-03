@@ -2,7 +2,7 @@ var ethers = require("ethers");
 
 let web3Provider = ethers.getDefaultProvider("ropsten");
 
-let reviewContractAddress = "0x5791a2ad689b61198a3aa73b0b11f02915aed691";
+let reviewContractAddress = "0x9c3a33c65800b4713fe886bc33ff42af9f953808";
 let storeContractAddress = "0xd71a648cf882ed954037136ee961f0db53e1689b";
 
 let privateKey =

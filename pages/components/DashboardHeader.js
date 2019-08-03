@@ -273,7 +273,7 @@ export default class Header extends React.Component {
                   className="dropdown-menu shadow dropdown-menu-right animated--grow-in"
                   role="menu"
                 >
-                  <a className="dropdown-item" role="presentation" href="#">
+                  <a className="dropdown-item" role="presentation" href="/profile">
                     <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
                     &nbsp;Profile
                   </a>

@@ -1,4 +1,5 @@
 import React from "react";
+import { getLength, createUser } from "../ethereum/app";
 
 export default class Index extends React.Component {
   render() {
@@ -8,11 +9,7 @@ export default class Index extends React.Component {
           <nav className="navbar navbar-light navbar-expand-md navigation-clean-button">
             <div className="container">
               <a className="navbar-brand" href="#">
-<<<<<<< HEAD
-                Scientific Journal
-=======
                 Journal
->>>>>>> dev
               </a>
               <button
                 data-toggle="collapse"
@@ -92,7 +89,7 @@ export default class Index extends React.Component {
               <h2 className="text-center">How does this work?</h2>
               <p className="text-center">
                 Only three steps to get started. All your data in stored in the
-                blockchain with the power of NuCypher&nbsp;
+                blockchain with the power of Matic Network&nbsp;
               </p>
             </div>
             <div className="row people">

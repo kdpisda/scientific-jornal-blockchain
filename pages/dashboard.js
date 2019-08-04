@@ -1,11 +1,16 @@
 import React from "react";
+import Router from "next/router";
 import Navbar from "./components/DashboardNavbar";
 import FAB from "./components/FabToAdd";
 import Header from "./components/DashboardHeader";
 import Footer from "./components/DashboardFooter";
+import { inject } from "mobx-react";
+import { runInAction } from "mobx";
 
+@inject("store")
 export default class Dashboard extends React.Component {
   render() {
+    const { user } = this.props.store;
     return (
       <div id="page-top">
         <div id="wrapper">
@@ -17,12 +22,17 @@ export default class Dashboard extends React.Component {
                 <div className="d-sm-flex justify-content-between align-items-center mb-4">
                   <h3 className="text-dark mb-0">Dashboard</h3>
                   <a
-                    className="btn btn-primary btn-sm d-none d-sm-inline-block"
+                    className="btn btn-primary btn-sm d-none d-sm-inline-block text-white"
                     role="button"
-                    href="#"
+                    onClick={() =>
+                      runInAction(() => {
+                        user.address = "guesttoken";
+                        Router.replace("/");
+                      })
+                    }
                   >
-                    <i className="fas fa-download fa-sm text-white-50" />
-                    &nbsp;Generate Report
+                    <i className="fas fa-sign-out-alt fa-sm text-white" />
+                    &nbsp;Logout
                   </a>
                 </div>
                 <div className="row">
@@ -133,7 +143,7 @@ export default class Dashboard extends React.Component {
                           <div className="row align-items-center no-gutters">
                             <div className="col mr-2">
                               <h6 className="mb-0">
-                                <strong>Lunch meeting</strong>
+                                <strong>Research Paper</strong>
                               </h6>
                               <span className="text-xs">10:30 AM</span>
                             </div>
@@ -144,10 +154,7 @@ export default class Dashboard extends React.Component {
                                   type="checkbox"
                                   id="formCheck-1"
                                 />
-                                <label
-                                  className="custom-control-label"
-                                  for="formCheck-1"
-                                />
+                                <label className="custom-control-label" />
                               </div>
                             </div>
                           </div>
@@ -156,7 +163,7 @@ export default class Dashboard extends React.Component {
                           <div className="row align-items-center no-gutters">
                             <div className="col mr-2">
                               <h6 className="mb-0">
-                                <strong>Lunch meeting</strong>
+                                <strong>Research Work</strong>
                               </h6>
                               <span className="text-xs">11:30 AM</span>
                             </div>
@@ -167,10 +174,7 @@ export default class Dashboard extends React.Component {
                                   type="checkbox"
                                   id="formCheck-2"
                                 />
-                                <label
-                                  className="custom-control-label"
-                                  for="formCheck-2"
-                                />
+                                <label className="custom-control-label" />
                               </div>
                             </div>
                           </div>
@@ -179,7 +183,7 @@ export default class Dashboard extends React.Component {
                           <div className="row align-items-center no-gutters">
                             <div className="col mr-2">
                               <h6 className="mb-0">
-                                <strong>Lunch meeting</strong>
+                                <strong>Paper on CNN</strong>
                               </h6>
                               <span className="text-xs">12:30 AM</span>
                             </div>
@@ -190,10 +194,7 @@ export default class Dashboard extends React.Component {
                                   type="checkbox"
                                   id="formCheck-3"
                                 />
-                                <label
-                                  className="custom-control-label"
-                                  for="formCheck-3"
-                                />
+                                <label className="custom-control-label" />
                               </div>
                             </div>
                           </div>
@@ -213,7 +214,7 @@ export default class Dashboard extends React.Component {
                           <div className="row align-items-center no-gutters">
                             <div className="col mr-2">
                               <h6 className="mb-0">
-                                <strong>Lunch meeting</strong>
+                                <strong>Deel Learning in IoT</strong>
                               </h6>
                               <span className="text-xs">10:30 AM</span>
                             </div>
@@ -224,10 +225,7 @@ export default class Dashboard extends React.Component {
                                   type="checkbox"
                                   id="formCheck-1"
                                 />
-                                <label
-                                  className="custom-control-label"
-                                  for="formCheck-1"
-                                />
+                                <label className="custom-control-label" />
                               </div>
                             </div>
                           </div>
@@ -236,7 +234,7 @@ export default class Dashboard extends React.Component {
                           <div className="row align-items-center no-gutters">
                             <div className="col mr-2">
                               <h6 className="mb-0">
-                                <strong>Lunch meeting</strong>
+                                <strong>Natural Learning Processing</strong>
                               </h6>
                               <span className="text-xs">11:30 AM</span>
                             </div>
@@ -247,10 +245,7 @@ export default class Dashboard extends React.Component {
                                   type="checkbox"
                                   id="formCheck-2"
                                 />
-                                <label
-                                  className="custom-control-label"
-                                  for="formCheck-2"
-                                />
+                                <label className="custom-control-label" />
                               </div>
                             </div>
                           </div>
@@ -259,7 +254,7 @@ export default class Dashboard extends React.Component {
                           <div className="row align-items-center no-gutters">
                             <div className="col mr-2">
                               <h6 className="mb-0">
-                                <strong>Lunch meeting</strong>
+                                <strong>BERT</strong>
                               </h6>
                               <span className="text-xs">12:30 AM</span>
                             </div>
@@ -270,10 +265,7 @@ export default class Dashboard extends React.Component {
                                   type="checkbox"
                                   id="formCheck-3"
                                 />
-                                <label
-                                  className="custom-control-label"
-                                  for="formCheck-3"
-                                />
+                                <label className="custom-control-label" />
                               </div>
                             </div>
                           </div>

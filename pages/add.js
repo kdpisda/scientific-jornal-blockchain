@@ -1,32 +1,54 @@
 import React from "react";
-import Navbar from "./components/DashboardNavbar";
+import { inject } from "mobx-react";
+import Router from "next/router";
 import { Editor } from "@tinymce/tinymce-react";
+import Navbar from "./components/DashboardNavbar";
 import Header from "./components/DashboardHeader";
 import Footer from "./components/DashboardFooter";
+import { review } from "../ethereum/app";
 
+@inject("store")
 export default class Dashboard extends React.Component {
-  constructor(){
+  constructor() {
     super();
-    this.state={
-      resource: null,
-      title: null
-    }
+    this.state = {
+      resource: "",
+      title: "",
+      price: ""
+    };
     this.saveResource = this.saveResource.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleEditorChange = (e) => {
-    this.setState({resource: e.target.getContent()})
-  }
+  handleEditorChange = e => {
+    this.setState({ resource: e.target.getContent() });
+  };
 
-  saveResource(){
+  async saveResource() {
     console.log(this.state);
+    const { user } = this.props.store;
+
+    var b = new Buffer(this.state.resource.toString() + new Date());
+    var s = b.toString("base64");
+    review
+      .addFile(
+        user.address,
+        s,
+        parseInt(this.state.price, 10),
+        this.state.title.toString()
+      )
+      .then(r => {
+        console.log(r);
+        Router.push("/resources");
+      })
+      .catch(e => console.log(e));
+    // review.newFile(hash);
   }
 
-  handleInputChange = (event) => {
+  handleInputChange = event => {
     this.setState({ [event.target.name]: event.target.value });
-  }
+  };
 
   render() {
     return (
@@ -43,7 +65,7 @@ export default class Dashboard extends React.Component {
                 <div className="row">
                   <div className="col-lg-12 mb-4">
                     <div className="form-group">
-                      <label for="username">
+                      <label>
                         <strong>Title</strong>
                       </label>
                       <input
@@ -58,9 +80,26 @@ export default class Dashboard extends React.Component {
                 </div>
                 <div className="row">
                   <div className="col-lg-12 mb-4">
+                    <div className="form-group">
+                      <label>
+                        <strong>Minimum price for each copy sold:</strong>
+                      </label>
+                      <input
+                        className="form-control shadow mb-4"
+                        type="number"
+                        placeholder="Please enter the price"
+                        name="price"
+                        onChange={this.handleInputChange}
+                        min="0"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-lg-12 mb-4">
                     <div className="card shadow mb-4">
                       <Editor
-                        apiKey='6oilfk927zaexmxx8vvo2zyy8el2i9oya4xjmclvvit7hb6x'
+                        apiKey="6oilfk927zaexmxx8vvo2zyy8el2i9oya4xjmclvvit7hb6x"
                         initialValue="<p>This is the initial content of the editor</p>"
                         init={{
                           plugins: "link image code",

@@ -45,11 +45,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="./static/css/styles.min.css?h=48930a4107b1ca5eb39ae1e606c0ea3f"
           />
-<<<<<<< HEAD
-=======
           <line rel="stylesheet" href="./static/css/index.css" />
-          <link rel="stylesheet" href="./static/css/index.css" />
->>>>>>> getresources
           <link
             rel="stylesheet"
             href="./static/bootstrap/css/bootstrap.min.css?h=8a6c2afcccaaabb2f6a787d71efc0bd9"
@@ -63,8 +59,6 @@ export default class MyDocument extends Document {
             href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
           />
         </head>
-<<<<<<< HEAD
-=======
         <body>
           <Main />
           <NextScript />
@@ -80,7 +74,6 @@ export default class MyDocument extends Document {
           integrity="sha384-tDTJ86ig+B5z7vXffrWKaBLC8dOCtiSV4a6OjWboyxfvcFNyL9Udxcld4kj1Wxny"
           crossOrigin="anonymous"
         /> */}
->>>>>>> getresources
       </html>
     );
   }

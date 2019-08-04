@@ -57,6 +57,9 @@ export default class Navbar extends React.Component {
                         <a className="collapse-item" href="/resources">
                           All Resources
                         </a>
+                        <a className="collapse-item" href="/addReview">
+                          Submit a Review
+                        </a>
                       </div>
                     </div>
                   </div>

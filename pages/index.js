@@ -89,7 +89,7 @@ export default class Index extends React.Component {
               <h2 className="text-center">How does this work?</h2>
               <p className="text-center">
                 Only three steps to get started. All your data in stored in the
-                blockchain with the power of NuCypher&nbsp;
+                blockchain with the power of Matic Network&nbsp;
               </p>
             </div>
             <div className="row people">

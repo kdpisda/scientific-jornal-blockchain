@@ -143,7 +143,7 @@ export default class Dashboard extends React.Component {
                           <div className="row align-items-center no-gutters">
                             <div className="col mr-2">
                               <h6 className="mb-0">
-                                <strong>Lunch meeting</strong>
+                                <strong>Research Paper</strong>
                               </h6>
                               <span className="text-xs">10:30 AM</span>
                             </div>
@@ -163,7 +163,7 @@ export default class Dashboard extends React.Component {
                           <div className="row align-items-center no-gutters">
                             <div className="col mr-2">
                               <h6 className="mb-0">
-                                <strong>Lunch meeting</strong>
+                                <strong>Research Work</strong>
                               </h6>
                               <span className="text-xs">11:30 AM</span>
                             </div>
@@ -183,7 +183,7 @@ export default class Dashboard extends React.Component {
                           <div className="row align-items-center no-gutters">
                             <div className="col mr-2">
                               <h6 className="mb-0">
-                                <strong>Lunch meeting</strong>
+                                <strong>Paper on CNN</strong>
                               </h6>
                               <span className="text-xs">12:30 AM</span>
                             </div>
@@ -214,7 +214,7 @@ export default class Dashboard extends React.Component {
                           <div className="row align-items-center no-gutters">
                             <div className="col mr-2">
                               <h6 className="mb-0">
-                                <strong>Lunch meeting</strong>
+                                <strong>Deel Learning in IoT</strong>
                               </h6>
                               <span className="text-xs">10:30 AM</span>
                             </div>
@@ -234,7 +234,7 @@ export default class Dashboard extends React.Component {
                           <div className="row align-items-center no-gutters">
                             <div className="col mr-2">
                               <h6 className="mb-0">
-                                <strong>Lunch meeting</strong>
+                                <strong>Natural Learning Processing</strong>
                               </h6>
                               <span className="text-xs">11:30 AM</span>
                             </div>
@@ -254,7 +254,7 @@ export default class Dashboard extends React.Component {
                           <div className="row align-items-center no-gutters">
                             <div className="col mr-2">
                               <h6 className="mb-0">
-                                <strong>Lunch meeting</strong>
+                                <strong>BERT</strong>
                               </h6>
                               <span className="text-xs">12:30 AM</span>
                             </div>

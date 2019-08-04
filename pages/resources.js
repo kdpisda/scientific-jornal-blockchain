@@ -1,4 +1,5 @@
 import React from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import { review } from "../ethereum/app";
 import Navbar from "./components/DashboardNavbar";
 import Header from "./components/DashboardHeader";
@@ -45,10 +46,18 @@ class ResourceRow extends React.Component {
                       <p className="text-center dropdown-header">
                         Quick Actions:
                       </p>
-                      <a className="dropdown-item" role="presentation" href="#">
-                        &nbsp;View
-                      </a>
-                      <a className="dropdown-item" role="presentation" href="#">
+
+                      <CopyToClipboard text={resource.hash}>
+                        <a className="dropdown-item" role="presentation">
+                          <span>&nbsp;Copy</span>
+                        </a>
+                      </CopyToClipboard>
+                      <a
+                        className="dropdown-item"
+                        role="presentation"
+                        href="#"
+                        disabled
+                      >
                         &nbsp;Edit
                       </a>
                       <div className="dropdown-divider" />
@@ -114,6 +123,7 @@ export default class Resource extends React.Component {
           ui.isLoading = false;
         });
       }
+      if (count == 1) ui.isLoading = false;
     }
   }
 

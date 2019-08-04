@@ -6,6 +6,7 @@ import Footer from "./components/DashboardFooter";
 import { inject, observer } from "mobx-react";
 import StarRatings from "react-star-ratings";
 import Loader from "../utils/loader";
+import { runInAction, toJS } from "mobx";
 
 @inject("store")
 @observer
@@ -18,7 +19,8 @@ export default class AddReview extends React.Component {
     hash: "",
     reviewVisible: false,
     isLoading: true,
-    search_query: ""
+    resources: "",
+    index: ""
   };
 
   constructor() {
@@ -45,23 +47,65 @@ export default class AddReview extends React.Component {
       })
       .catch(e => {
         console.log("-----------------", e);
+        ui.isLoading = false;
       });
     ui.isLoading = false;
   }
 
-  async updateReview() {
-    console.log(this.state);
+  handleSubmit() {
+    const { user } = this.props.store;
+    for (var i = 0; i < this.state.resources.length; i++) {
+      if (this.state.resources[i].hash == this.state.hash) {
+        this.setState({ index: i });
+        break;
+      }
+    }
+    review
+      .addComments(
+        user.address,
+        this.state.hash,
+        this.state.review,
+        this.state.rating
+      )
+      .then(function(res) {
+        console.log(res);
+      });
+  }
+
+  async getAllResourcesFromBlockChain() {
+    const { user, ui } = this.props.store;
+    let i,
+      list = [];
+    ui.isLoading = true;
+
+    if (ui.fetchedFromPersist) {
+      let count = await review.getUserFileLength(user.address);
+      count = parseInt(count._hex);
+      for (i = 0; i < count; i++) {
+        review.getUserFilebyIndex(user.address, i).then(file => {
+          list.push({
+            id: i,
+            name: file[1],
+            hash: file[0],
+            rating: file[2]
+          });
+          this.setState({ resources: list });
+          ui.isLoading = false;
+        });
+      }
+      if (count == 1) ui.isLoading = false;
+    }
   }
 
   componentDidMount() {
     // Initialize the state
-    const { user } = this.props.store;
+    const { ui } = this.props.store;
     this.setState({ hash: this.state.hash });
-  }
-
-  handleSubmit() {
-    //Do something to handle the submit
-    console.log(this.state);
+    this.getAllResourcesFromBlockChain().then(response =>
+      runInAction(() => {
+        ui.fetchList = true;
+      })
+    );
   }
 
   changeRating(newRating) {

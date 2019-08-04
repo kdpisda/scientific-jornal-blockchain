@@ -5,6 +5,7 @@ import Header from "./components/DashboardHeader";
 import Footer from "./components/DashboardFooter";
 import { inject, observer } from "mobx-react";
 import StarRatings from "react-star-ratings";
+import Loader from "../utils/loader";
 
 @inject("store")
 @observer
@@ -15,26 +16,36 @@ export default class AddReview extends React.Component {
     review: "",
     rating: 1,
     hash: "",
-    reviewVisible: false
+    reviewVisible: false,
+    isLoading: true,
+    search_query: ""
   };
 
   constructor() {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.changeRating = this.changeRating.bind(this);
-    this.getResource = this.getResource.bind(this);
+    // this.getResource = this.getResource.bind(this);
   }
 
   async getResource() {
     const { user, ui } = this.props.store;
     ui.isLoading = true;
-    let resource = await review
-      .getFileFromHash(user.address, user.hash)
+    console.log(user);
+    await review
+      .getFileFromHash(user.address, this.state.hash)
       .then(res => {
         console.log(res);
+        this.setState({ title: res[0] });
+        this.setState({
+          content: Buffer.from(this.state.hash, "base64").toString("ascii")
+        });
+        this.setState({ rating: parseInt(res[1], 16) });
         ui.isLoading = false;
+      })
+      .catch(e => {
+        console.log("-----------------", e);
       });
-    console.log(resource);
     ui.isLoading = false;
   }
 
@@ -45,7 +56,7 @@ export default class AddReview extends React.Component {
   componentDidMount() {
     // Initialize the state
     const { user } = this.props.store;
-    this.setState({ hash: user.hash });
+    this.setState({ hash: this.state.hash });
   }
 
   handleSubmit() {
@@ -60,10 +71,7 @@ export default class AddReview extends React.Component {
   }
 
   render() {
-    const { user } = this.props.store;
-    if (user.hash !== "" || user.hash !== null) {
-      setTimeout(this.getResource, 300);
-    }
+    const { user, ui } = this.props.store;
     return (
       <div id="page-top">
         <div id="wrapper">
@@ -71,7 +79,33 @@ export default class AddReview extends React.Component {
           <div className="d-flex flex-column" id="content-wrapper">
             <div id="content">
               <Header />
-              {user.hash ? (
+              <div className="container">
+                <div className="row">
+                  <div className="col">
+                    <div className="card shadow mb-4">
+                      <div className="card-header d-flex justify-content-between align-items-center">
+                        <h6 className="text-primary font-weight-bold m-0">
+                          Enter Your Hash
+                        </h6>
+                      </div>
+                      <div className="card-body" style={{ padding: 0 }}>
+                        <input
+                          className="form-control"
+                          style={{ margin: 0, border: 0 }}
+                          name="hash"
+                          onChange={event => {
+                            this.setState({ hash: event.target.value });
+                            console.log(this.state);
+                            this.getResource();
+                          }}
+                          value={this.state.hash}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {this.state.hash && !ui.isLoading ? (
                 <div>
                   <div className="container-fluid">
                     <div className="d-sm-flex justify-content-between align-items-center mb-4">
@@ -96,7 +130,7 @@ export default class AddReview extends React.Component {
                             </h6>
                           </div>
                           <div className="card-body">
-                            <p className="m-0">{this.state.content}</p>
+                            <div className="m-0">{this.state.content}</div>
                           </div>
                         </div>
                       </div>
@@ -155,6 +189,7 @@ export default class AddReview extends React.Component {
                       paper
                     </h3>
                   </div>
+                  <Loader />
                 </div>
               )}
             </div>

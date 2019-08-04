@@ -26,11 +26,6 @@ export default class Header extends React.Component {
                 className="bg-light form-control border-0 small"
                 type="text"
                 placeholder="Please enter the hash"
-                onChange={event => {
-                  this.setState({ search_query: event.target.value });
-                  user.hash = event.target.value;
-                }}
-                value={this.state.search_query}
               />
               <div className="input-group-append">
                 <button className="btn btn-primary py-0" type="button">

@@ -13,7 +13,8 @@ export default class Dashboard extends React.Component {
     super();
     this.state = {
       resource: "",
-      title: ""
+      title: "",
+      price: ""
     };
     this.saveResource = this.saveResource.bind(this);
     this.handleEditorChange = this.handleEditorChange.bind(this);
@@ -30,9 +31,13 @@ export default class Dashboard extends React.Component {
 
     var b = new Buffer(this.state.resource.toString() + new Date());
     var s = b.toString("base64");
-    // addFile(address useraddress, string memory hash, string memory name, uint rating)
     review
-      .addFile(user.address, s, this.state.title.toString())
+      .addFile(
+        user.address,
+        s,
+        parseInt(this.state.price, 10),
+        this.state.title.toString()
+      )
       .then(r => {
         console.log(r);
         Router.push("/resources");
@@ -69,6 +74,23 @@ export default class Dashboard extends React.Component {
                         placeholder="Please enter the title"
                         name="title"
                         onChange={this.handleInputChange}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-lg-12 mb-4">
+                    <div className="form-group">
+                      <label>
+                        <strong>Minimum price for each copy sold:</strong>
+                      </label>
+                      <input
+                        className="form-control shadow mb-4"
+                        type="number"
+                        placeholder="Please enter the price"
+                        name="price"
+                        onChange={this.handleInputChange}
+                        min="0"
                       />
                     </div>
                   </div>

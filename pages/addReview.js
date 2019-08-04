@@ -6,16 +6,6 @@ import Footer from "./components/DashboardFooter";
 import { inject, observer } from "mobx-react";
 import StarRatings from "react-star-ratings";
 
-function chunk(array, size) {
-  const chunked_arr = [];
-  let index = 0;
-  while (index < array.length) {
-    chunked_arr.push(array.slice(index, size + index));
-    index += size;
-  }
-  return chunked_arr;
-}
-
 @inject("store")
 @observer
 export default class AddReview extends React.Component {
@@ -32,6 +22,24 @@ export default class AddReview extends React.Component {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
     this.changeRating = this.changeRating.bind(this);
+    this.getResource = this.getResource.bind(this);
+  }
+
+  async getResource() {
+    const { user, ui } = this.props.store;
+    ui.isLoading = true;
+    let resource = await review
+      .getFileFromHash(user.address, user.hash)
+      .then(res => {
+        console.log(res);
+        ui.isLoading = false;
+      });
+    console.log(resource);
+    ui.isLoading = false;
+  }
+
+  async updateReview() {
+    console.log(this.state);
   }
 
   componentDidMount() {
@@ -53,6 +61,9 @@ export default class AddReview extends React.Component {
 
   render() {
     const { user } = this.props.store;
+    if (user.hash !== "" || user.hash !== null) {
+      setTimeout(this.getResource, 300);
+    }
     return (
       <div id="page-top">
         <div id="wrapper">
